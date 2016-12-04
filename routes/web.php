@@ -11,5 +11,5 @@
 |
 */
 
+Route::post('daas', 'MainController@daas');
 Route::get('/', 'MainController@index');
-Route::post('/', 'MainController@index');
