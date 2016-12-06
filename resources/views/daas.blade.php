@@ -1,1 +1,1 @@
-
+echo $query_decomposed;
