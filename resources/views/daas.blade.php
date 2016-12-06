@@ -1,1 +1,1 @@
-{{ $query_decomposed }}
+{{ $result }}

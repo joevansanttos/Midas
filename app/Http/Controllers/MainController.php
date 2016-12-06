@@ -47,7 +47,7 @@ class MainController extends Controller
         $result = $this->result_formatter(json_decode(utf8_encode($daas_result)), $query_decomposed, $api_params[0]);
 
         // envia para a view o resultado formatado
-        return view('daas')->with('query_decomposed');
+        return view('daas')->with(compact('result'));
 
     }
 
