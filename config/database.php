@@ -87,7 +87,7 @@ return [
             'username' => env('DB_USERNAME', 'admin'),
             'password' => env('DB_PASSWORD', 'admin'),
             'options' => [
-        'database' => 'admin' // sets the authentication database required by mongo 3
+        'database' => 'heroku_mnk5ppkt' // sets the authentication database required by mongo 3
       ]
 ],
 
