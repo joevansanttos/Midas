@@ -6,10 +6,9 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
-        "laravel/framework": "5.3.*",
-        "leroy-merlin-br/mongolid-laravel":"2.0.*",
-        "ext-mongo":"*",
-        "jenssegers/mongodb": "2.3.*"
+        "laravel/framework": "5.3.*",        
+        "leroy-merlin-br/mongolid-laravel":"*",
+        "jenssegers/mongodb": "*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
