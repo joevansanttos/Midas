@@ -83,9 +83,9 @@ return [
             'driver'   => 'mongodb',
             'host'     => env('DB_HOST', 'localhost'),
             'port'     => env('DB_PORT', 27017),
-            'database' => 'heroku_mnk5ppkt',
-            'username' => 'admin',
-            'password' => 'admin',
+            'database' => env('DB_DATABASE', 'heroku_mnk5ppkt'),
+            'username' => env('DB_USERNAME', 'admin'),
+            'password' => env('DB_PASSWORD', 'admin'),
             'options' => [
         'database' => 'admin' // sets the authentication database required by mongo 3
       ]
