@@ -13,8 +13,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class DaaSModel extends Model
 {
-    protected $collection = 'dataset';
-    protected $connection = 'mongodb';
+    protected $table = 'dataset';
+    protected $connection = 'mysql';
 
     public function get_provider_api($dataset_id)
     {
