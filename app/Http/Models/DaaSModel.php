@@ -9,12 +9,14 @@
 
 namespace App\Http\Models;
 
+use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use Illuminate\Database\Eloquent\Model;
 
-class DaaSModel extends Model
+class DaaSModel extends Eloquent
 {
-    protected $table = 'dataset';
-    protected $connection = 'mysql';
+    protected $connection = 'mongodb';
+    protected $collection = 'dataset';
+
 
     public function get_provider_api($dataset_id)
     {
