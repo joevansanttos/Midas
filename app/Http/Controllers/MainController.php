@@ -32,7 +32,7 @@ class MainController extends Controller
 
         // chamada da função de decomposição da query
         $query_decomposed = $this->query_decomposer($query);
-
+        print_r($query_decomposed);
 
         // chamada da função que consulta ao banco para pegar as informações do DaaS informado na query
         $api_params = $daas_model->get_provider_api($query_decomposed["dataset"]);
