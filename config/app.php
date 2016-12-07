@@ -140,7 +140,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
-        Jenssegers\Mongodb\MongodbServiceProvider::class, 
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -163,7 +163,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        MongolidLaravel\MongolidServiceProvider::class,
         /*
          * Package Service Providers...
          */
