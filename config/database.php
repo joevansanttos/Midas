@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -79,7 +79,19 @@ return [
             'sslmode' => 'prefer',
         ],
 
-        
+        'mongodb' => [
+            'driver'   => 'mongodb',
+            'host'     => env('DB_HOST', 'localhost'),
+            'port'     => env('DB_PORT', 27017),
+            'database' => 'heroku_mnk5ppkt',
+            'username' => 'admin',
+            'password' => 'admin',
+            'options' => [
+        'database' => 'admin' // sets the authentication database required by mongo 3
+      ]
+],
+
+
     ],
 
     /*
