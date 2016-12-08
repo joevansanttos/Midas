@@ -40,7 +40,7 @@ class MainController extends Controller
         // chamada da função que contrói a url para a API
         $daas_request_url = $this->query_builder($api_params[0], $query_decomposed);
 
-        print_r($daas_request_url);
+        
 
         // requisita ao DaaS as informações
         $daas_result = file_get_contents($daas_request_url, false);
