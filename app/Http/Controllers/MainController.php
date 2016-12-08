@@ -147,7 +147,7 @@ class MainController extends Controller
         $contexto = stream_context_create(array(
             'http' => array(
             'method' => 'POST',
-            'content' => $dados,
+            'content' => $url,
             'header' => "Content-type: application/x-www-form-urlencoded\r\n"
             . "Content-Length: " . strlen($dados) . "\r\n",
         )
