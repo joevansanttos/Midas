@@ -139,8 +139,8 @@ class MainController extends Controller
     {
         // TODO comentar essa parte
         print_r($daas_result);
-        print_r($query_decomposed);
-        print_r($api_params);
+        //print_r($query_decomposed);
+        //print_r($api_params);
         $records_param = $api_params->records_param;
         $fields_param = $api_params->fields_param;
         $fields = $query_decomposed["fields"];
