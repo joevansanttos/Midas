@@ -143,8 +143,16 @@ class MainController extends Controller
         //print_r($daas_result);
         //print_r($query_decomposed);
         //print_r($api_params);
-        $url = "http://exmaple.com/data.json";
-        $daas_result2 = file_get_contents($url, false);
+        $url = 'http://exmaple.com/data.json';
+        $contexto = stream_context_create(array(
+            'http' => array(
+            'method' => 'POST',
+            'content' => $dados,
+            'header' => "Content-type: application/x-www-form-urlencoded\r\n"
+            . "Content-Length: " . strlen($dados) . "\r\n",
+        )
+));
+        $daas_result2 = file_get_contents($url, null,$contexto);
         if($daas_result2[0] == "<"){
           print_r("fUNCIONOU");
         }
