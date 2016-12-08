@@ -40,7 +40,7 @@ class MainController extends Controller
         // chamada da função que contrói a url para a API
         $daas_request_url = $this->query_builder($api_params[0], $query_decomposed);
 
-        
+
 
         // requisita ao DaaS as informações
         $daas_result = file_get_contents($daas_request_url, false);
@@ -143,6 +143,11 @@ class MainController extends Controller
         //print_r($daas_result);
         //print_r($query_decomposed);
         //print_r($api_params);
+        $url = "http://exmaple.com/data.json";
+        $daas_result2 = file_get_contents($url, false);
+        if($daas_result2[0] == "<"){
+          print_r("fUNCIONOU");
+        }
         $records_param = $api_params->records_param;
         $fields_param = $api_params->fields_param;
         $fields = $query_decomposed["fields"];
