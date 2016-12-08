@@ -138,8 +138,8 @@ class MainController extends Controller
     private function result_formatter($daas_result, $query_decomposed, $api_params)
     {
         // TODO comentar essa parte
-        print_r($daas_result);
-        //print_r($query_decomposed);
+        //print_r($daas_result);
+        print_r($query_decomposed);
         //print_r($api_params);
         $records_param = $api_params->records_param;
         $fields_param = $api_params->fields_param;
