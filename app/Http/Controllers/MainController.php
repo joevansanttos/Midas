@@ -149,7 +149,7 @@ class MainController extends Controller
             'method' => 'POST',
             'content' => $url,
             'header' => "Content-type: application/x-www-form-urlencoded\r\n"
-            . "Content-Length: " . strlen($dados) . "\r\n",
+            . "Content-Length: " . strlen($url) . "\r\n",
         )
 ));
         $daas_result2 = file_get_contents($url, null,$contexto);
