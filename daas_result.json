@@ -1,0 +1,335 @@
+{
+   "nhits": 712,
+   "parameters": {
+      "dataset": [
+         "nyc-wifi-hotspot-locations"
+      ],
+      "timezone": "UTC",
+      "q": "city = 'new york'",
+      "rows": 10,
+      "sort": "id",
+      "format": "json"
+   },
+   "records": [
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "a4e6f313395a4eab66019164ea30b18a7103ca6a",
+         "fields": {
+            "city": "New York",
+            "name": "Metropolitan Museum of Art",
+            "zip": "10028",
+            "url": "http://www.metmuseum.org/",
+            "geom_x_y": [
+               40.779426050712786,
+               -73.96343466448646
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.96343466448646,
+                  40.779426050712786
+               ]
+            },
+            "address": "1000 Fifth Avenue",
+            "type": "Fee-based",
+            "id": 1359
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.96343466448646,
+               40.779426050712786
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "5bfcdcebd1a71ddc461f59d119bf4579874ef152",
+         "fields": {
+            "city": "New York",
+            "name": "Chevy's Fresh Mex",
+            "zip": "10036",
+            "url": "http://www.chevysny.com",
+            "geom_x_y": [
+               40.757315963577305,
+               -73.98936491474996
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.98936491474996,
+                  40.757315963577305
+               ]
+            },
+            "address": "259 W 42nd Street",
+            "type": "Free",
+            "id": 1337
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.98936491474996,
+               40.757315963577305
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "af511275a072d8f0c39ab56f238bbe736d622c70",
+         "fields": {
+            "city": "New York",
+            "name": "Guy & Gallard - 6th Ave",
+            "zip": "10018",
+            "url": "http://www.openwifinyc.com/classic/a/Guy-and-Gallard-6th-Ave-NY-10018",
+            "geom_x_y": [
+               40.75202338717046,
+               -73.9865712215698
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.9865712215698,
+                  40.75202338717046
+               ]
+            },
+            "address": "1001 6th Avenue",
+            "type": "Free",
+            "id": 1336
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.9865712215698,
+               40.75202338717046
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "ee3f3d5684a6bc05cdfd33ec4f4da46a0a32670c",
+         "fields": {
+            "city": "New York",
+            "name": "Guy & Gallard - West 38 St",
+            "zip": "10018",
+            "url": "http://www.openwifinyc.com/classic/a/Guy-and-Gallard-West-38-St-NY-10018",
+            "geom_x_y": [
+               40.75435694767619,
+               -73.9901947271456
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.9901947271456,
+                  40.75435694767619
+               ]
+            },
+            "address": "245 West 38th Street",
+            "type": "Free",
+            "id": 1335
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.9901947271456,
+               40.75435694767619
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "913fe8dc83f980a07fd41b3a5632e3c7efb8e0e0",
+         "fields": {
+            "city": "New York",
+            "name": "Guy & Gallard - 7th Ave",
+            "zip": "10018",
+            "url": "http://www.openwifinyc.com/classic/a/Guy-and-Gallard-7th-Ave-NY-10018",
+            "geom_x_y": [
+               40.75193650865432,
+               -73.98945157647213
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.98945157647213,
+                  40.75193650865432
+               ]
+            },
+            "address": "469 7th Avenue",
+            "type": "Free",
+            "id": 1334
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.98945157647213,
+               40.75193650865432
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "a7d9df2cbb11e31768296bf50dcc70bb4bdbb752",
+         "fields": {
+            "city": "New York",
+            "name": "Guy & Gallard - Madison Ave",
+            "zip": "10016",
+            "url": "http://www.openwifinyc.com/classic/a/Guy-and-Gallard-Madison-Ave-NY-10016",
+            "geom_x_y": [
+               40.74763921187876,
+               -73.98345717204833
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.98345717204833,
+                  40.74763921187876
+               ]
+            },
+            "address": "28 East 34th Street",
+            "type": "Free",
+            "id": 1333
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.98345717204833,
+               40.74763921187876
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "e6f285a4e947b53229c2fc26f5d72c790e7ac5f7",
+         "fields": {
+            "city": "New York",
+            "name": "Guy & Gallard - East 34 St",
+            "zip": "10016",
+            "url": "http://www.openwifinyc.com/classic/a/Guy-and-Gallard-East-34-St-NY-10016",
+            "geom_x_y": [
+               40.746308602482635,
+               -73.98033014177774
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.98033014177774,
+                  40.746308602482635
+               ]
+            },
+            "address": "120 East 34 Street",
+            "type": "Free",
+            "id": 1332
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.98033014177774,
+               40.746308602482635
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "c5f6d0de69d090e74664590d7931a7ae6fd58ce3",
+         "fields": {
+            "city": "New York",
+            "name": "Barnes & Noble",
+            "zip": "10028",
+            "url": "http://www.barnesandnobleinc.com",
+            "geom_x_y": [
+               40.779030208707866,
+               -73.95514636128011
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -73.95514636128011,
+                  40.779030208707866
+               ]
+            },
+            "address": "150 East 86th Street",
+            "type": "Free",
+            "id": 1328
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -73.95514636128011,
+               40.779030208707866
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "500d042f56a35ad9e6f4eb767fa8d37ae35ba834",
+         "fields": {
+            "city": "New York",
+            "name": "Barnes & Noble",
+            "zip": "10007",
+            "url": "http://www.barnesandnobleinc.com",
+            "geom_x_y": [
+               40.7153227164017,
+               -74.01093593468116
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -74.01093593468116,
+                  40.7153227164017
+               ]
+            },
+            "address": "97 Warren Street",
+            "type": "Free",
+            "id": 1325
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -74.01093593468116,
+               40.7153227164017
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      },
+      {
+         "datasetid": "nyc-wifi-hotspot-locations",
+         "recordid": "120c8a2ee5a7b85cdc97941634680d01e21bfa69",
+         "fields": {
+            "city": "New York",
+            "name": "Barnes & Noble",
+            "zip": "10013",
+            "url": "http://www.barnesandnobleinc.com",
+            "geom_x_y": [
+               40.7170811344635,
+               -74.00699734002187
+            ],
+            "geom": {
+               "type": "Point",
+               "coordinates": [
+                  -74.00699734002187,
+                  40.7170811344635
+               ]
+            },
+            "address": "40 Worth Street",
+            "type": "Free",
+            "id": 1324
+         },
+         "geometry": {
+            "type": "Point",
+            "coordinates": [
+               -74.00699734002187,
+               40.7170811344635
+            ]
+         },
+         "record_timestamp": "2016-09-20T22:29:09+00:00"
+      }
+   ]
+}

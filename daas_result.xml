@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <nhits>712</nhits>
+  <parameters>
+    <dataset>nyc-wifi-hotspot-locations</dataset>
+    <timezone>UTC</timezone>
+    <q>city = &#x27;new york&#x27;</q>
+    <rows>10</rows>
+    <sort>id</sort>
+    <format>json</format>
+  </parameters>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>a4e6f313395a4eab66019164ea30b18a7103ca6a</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Metropolitan Museum of Art</name>
+      <zip>10028</zip>
+      <url>http://www.metmuseum.org/</url>
+      <geom_x_y>40.779426050712786</geom_x_y>
+      <geom_x_y>-73.96343466448646</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.96343466448646</coordinates>
+        <coordinates>40.779426050712786</coordinates>
+      </geom>
+      <address>1000 Fifth Avenue</address>
+      <type>Fee-based</type>
+      <id>1359</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.96343466448646</coordinates>
+      <coordinates>40.779426050712786</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>5bfcdcebd1a71ddc461f59d119bf4579874ef152</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Chevy&#x27;s Fresh Mex</name>
+      <zip>10036</zip>
+      <url>http://www.chevysny.com</url>
+      <geom_x_y>40.757315963577305</geom_x_y>
+      <geom_x_y>-73.98936491474996</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.98936491474996</coordinates>
+        <coordinates>40.757315963577305</coordinates>
+      </geom>
+      <address>259 W 42nd Street</address>
+      <type>Free</type>
+      <id>1337</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.98936491474996</coordinates>
+      <coordinates>40.757315963577305</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>af511275a072d8f0c39ab56f238bbe736d622c70</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Guy &amp; Gallard - 6th Ave</name>
+      <zip>10018</zip>
+      <url>http://www.openwifinyc.com/classic/a/Guy-and-Gallard-6th-Ave-NY-10018</url>
+      <geom_x_y>40.75202338717046</geom_x_y>
+      <geom_x_y>-73.9865712215698</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.9865712215698</coordinates>
+        <coordinates>40.75202338717046</coordinates>
+      </geom>
+      <address>1001 6th Avenue</address>
+      <type>Free</type>
+      <id>1336</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.9865712215698</coordinates>
+      <coordinates>40.75202338717046</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>ee3f3d5684a6bc05cdfd33ec4f4da46a0a32670c</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Guy &amp; Gallard - West 38 St</name>
+      <zip>10018</zip>
+      <url>http://www.openwifinyc.com/classic/a/Guy-and-Gallard-West-38-St-NY-10018</url>
+      <geom_x_y>40.75435694767619</geom_x_y>
+      <geom_x_y>-73.9901947271456</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.9901947271456</coordinates>
+        <coordinates>40.75435694767619</coordinates>
+      </geom>
+      <address>245 West 38th Street</address>
+      <type>Free</type>
+      <id>1335</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.9901947271456</coordinates>
+      <coordinates>40.75435694767619</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>913fe8dc83f980a07fd41b3a5632e3c7efb8e0e0</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Guy &amp; Gallard - 7th Ave</name>
+      <zip>10018</zip>
+      <url>http://www.openwifinyc.com/classic/a/Guy-and-Gallard-7th-Ave-NY-10018</url>
+      <geom_x_y>40.75193650865432</geom_x_y>
+      <geom_x_y>-73.98945157647213</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.98945157647213</coordinates>
+        <coordinates>40.75193650865432</coordinates>
+      </geom>
+      <address>469 7th Avenue</address>
+      <type>Free</type>
+      <id>1334</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.98945157647213</coordinates>
+      <coordinates>40.75193650865432</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>a7d9df2cbb11e31768296bf50dcc70bb4bdbb752</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Guy &amp; Gallard - Madison Ave</name>
+      <zip>10016</zip>
+      <url>http://www.openwifinyc.com/classic/a/Guy-and-Gallard-Madison-Ave-NY-10016</url>
+      <geom_x_y>40.74763921187876</geom_x_y>
+      <geom_x_y>-73.98345717204833</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.98345717204833</coordinates>
+        <coordinates>40.74763921187876</coordinates>
+      </geom>
+      <address>28 East 34th Street</address>
+      <type>Free</type>
+      <id>1333</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.98345717204833</coordinates>
+      <coordinates>40.74763921187876</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>e6f285a4e947b53229c2fc26f5d72c790e7ac5f7</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Guy &amp; Gallard - East 34 St</name>
+      <zip>10016</zip>
+      <url>http://www.openwifinyc.com/classic/a/Guy-and-Gallard-East-34-St-NY-10016</url>
+      <geom_x_y>40.746308602482635</geom_x_y>
+      <geom_x_y>-73.98033014177774</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.98033014177774</coordinates>
+        <coordinates>40.746308602482635</coordinates>
+      </geom>
+      <address>120 East 34 Street</address>
+      <type>Free</type>
+      <id>1332</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.98033014177774</coordinates>
+      <coordinates>40.746308602482635</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>c5f6d0de69d090e74664590d7931a7ae6fd58ce3</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Barnes &amp; Noble</name>
+      <zip>10028</zip>
+      <url>http://www.barnesandnobleinc.com</url>
+      <geom_x_y>40.779030208707866</geom_x_y>
+      <geom_x_y>-73.95514636128011</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-73.95514636128011</coordinates>
+        <coordinates>40.779030208707866</coordinates>
+      </geom>
+      <address>150 East 86th Street</address>
+      <type>Free</type>
+      <id>1328</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-73.95514636128011</coordinates>
+      <coordinates>40.779030208707866</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>500d042f56a35ad9e6f4eb767fa8d37ae35ba834</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Barnes &amp; Noble</name>
+      <zip>10007</zip>
+      <url>http://www.barnesandnobleinc.com</url>
+      <geom_x_y>40.7153227164017</geom_x_y>
+      <geom_x_y>-74.01093593468116</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-74.01093593468116</coordinates>
+        <coordinates>40.7153227164017</coordinates>
+      </geom>
+      <address>97 Warren Street</address>
+      <type>Free</type>
+      <id>1325</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-74.01093593468116</coordinates>
+      <coordinates>40.7153227164017</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+  <records>
+    <datasetid>nyc-wifi-hotspot-locations</datasetid>
+    <recordid>120c8a2ee5a7b85cdc97941634680d01e21bfa69</recordid>
+    <fields>
+      <city>New York</city>
+      <name>Barnes &amp; Noble</name>
+      <zip>10013</zip>
+      <url>http://www.barnesandnobleinc.com</url>
+      <geom_x_y>40.7170811344635</geom_x_y>
+      <geom_x_y>-74.00699734002187</geom_x_y>
+      <geom>
+        <type>Point</type>
+        <coordinates>-74.00699734002187</coordinates>
+        <coordinates>40.7170811344635</coordinates>
+      </geom>
+      <address>40 Worth Street</address>
+      <type>Free</type>
+      <id>1324</id>
+    </fields>
+    <geometry>
+      <type>Point</type>
+      <coordinates>-74.00699734002187</coordinates>
+      <coordinates>40.7170811344635</coordinates>
+    </geometry>
+    <record_timestamp>2016-09-20T22:29:09+00:00</record_timestamp>
+  </records>
+</root>
