@@ -71,7 +71,7 @@ class MainController extends Controller
         $indexes[] = strpos($sql, "limit");
 
         // guarda os campos, dataset, filtros, ordem e limite
-        $jsonArray["fields"]    = $this->getFields($sql, $indexes[0] - 6);
+        $jsonArray["fields"]    = $this->getFields($sql, $indexes[0]);
         $jsonArray["dataset"]   = $this->getDataset($sql, $indexes[0] + 4, $indexes, 1);
         $jsonArray["filters"]   = $indexes[1] === false ? false : $this->getFilters($sql, $indexes[1] + 5, $indexes, 2);
         $jsonArray["order"]     = $indexes[2] === false ? false : $this->getOrder($sql, $indexes[2] + 8, $indexes, 3);
@@ -375,7 +375,7 @@ class MainController extends Controller
 
     private function getFields($sql, $from)
     {
-        $str_fields = trim(substr($sql, 6, $from));
+        $str_fields = trim(substr($sql, 12, $from-12));
         return explode(",", str_ireplace(" ", "", $str_fields));
     }
 
