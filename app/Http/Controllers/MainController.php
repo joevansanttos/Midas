@@ -128,6 +128,8 @@ class MainController extends Controller
             }
         }
 
+        //$daas_request =  'https://data.cityofnewyork.us/resource/r27e-u3sy.csv?borough=Bronx';
+        //$daas_request =  'https://data.cityofnewyork.us/resource/r27e-u3sy.xml?borough=Bronx';
         return $daas_request;
     }
 
@@ -138,19 +140,18 @@ class MainController extends Controller
      * @param $api_params
      * @return string
      */
-    private function result_formatter($daas_result, $query_decomposed, $api_params)
-    {
 
-        if($daas_result[0] == "{"){
-          $saas_result = $this->json_formatter($daas_result,$query_decomposed, $api_params);
-        }else if ($daas_result[0] == "<"){
-          $this->xml_formatter($daas_result,$query_decomposed, $api_params);
-        }else{
-          $this->csv_formatter($daas_result, $query_decomposed, $api_params);
-        }
-
-        return $saas_result;
-    }
+     private function result_formatter($daas_result, $query_decomposed, $api_params)
+     {
+         if($daas_result[0] == "{"){
+           $saas_result = $this->json_formatter($daas_result,$query_decomposed, $api_params);
+         }else if ($daas_result[0] == "<"){
+           $saas_result = $this->xml_formatter($daas_result,$query_decomposed, $api_params);
+         }else{
+           $saas_result = $this->csv_formatter($daas_result, $query_decomposed, $api_params);
+         }
+         return $saas_result;
+     }
 
     /* ------------------------------------------------------------ */
     /* -------------------- Funções auxiliares -------------------- */
@@ -176,40 +177,83 @@ class MainController extends Controller
       return json_encode($saas_result);
     }
 
-    private function xml_formatter($query_decomposed, $api_params)
+    private function xml_formatter($daas_result,$query_decomposed, $api_params)
     {
-
-      $daas_result = simplexml_load_file("/var/www/html/midas/daas_result.xml");
-      $records_param = $api_params->records_param;
+      $daas_result = simplexml_load_string($daas_result);
       $fields_param = $api_params->fields_param;
       $fields = $query_decomposed["fields"];
+      $fields[0] = 'name';
 
-      if ($records_param != null && $fields_param != null) {
-          $saas_result = $this->preenchido_preenchido($fields,$daas_result,$records_param,$fields_param);
-        } else if ($records_param != null && $fields_param == null) {
-          $saas_result = $this->preenchido_vazio($fields,$daas_result,$records_param,$fields_param);
-      }else if ($records_param == null && $fields_param != null){
-          $saas_result = $this->vazio_preenchido($fields,$daas_result,$records_param,$fields_param);
-      }else{
-        $saas_result = $this->vazio_vazio($fields,$daas_result,$records_param,$fields_param);
+      $i = 0;
+      foreach ($fields as $field) {
+        $elements = $daas_result->xpath('////'.$field);
+        $j = 0;
+        foreach ($elements as $element) {
+          $saas_result[$j][$i] = $element;
+          $j++;
+        }
+        $i++;
       }
 
       return json_encode($saas_result);
     }
 
-    private function csv_formatter($query_decomposed, $api_params)
+    private function csv_formatter($daas_result,$query_decomposed, $api_params)
     {
       $records_param = $api_params->records_param;
       $fields_param = $api_params->fields_param;
       $fields = $query_decomposed["fields"];
-      $daas_result = array_map('str_getcsv', file('/var/www/html/midas/daas_result.csv'));
-      $daas_result = (object) $daas_result;
+      $fields[0] = 'name';
 
-      $palavra = $this->create_palavra($query_decomposed,$fields_param);
-      $vetor_palavra = $this->create_vector_palavra($palavra,$fields_param);
-      $vetor_id = $this->create_vetor_id($vetor_palavra,$daas_result);
-      $saas_result = $this->create_saas_result($daas_result,$vetor_id);
+      $daas_result = $this->csv_to_array($daas_result);
+      $keys = $this->find_keys_attributes($fields,$daas_result[0]);
+      $saas_result = $this->create_saas_result($daas_result,$keys);
       return json_encode($saas_result);
+    }
+
+    private function csv_to_array($daas_result)
+    {
+      $lines = explode(PHP_EOL, $daas_result);
+      $array = array();
+      foreach ($lines as $line) {
+        $array[] = str_getcsv($line);
+      }
+      return $array;
+    }
+
+    private function find_keys_attributes($fields,$daas_result)
+    {
+      $i = 0;
+      foreach ($daas_result as $key => $daas) {
+        foreach ($fields as $field) {
+          if($daas == $field){
+            $vetor_keys[$i] = $key;
+            $i++;
+          }
+        }
+      }
+      return $vetor_keys;
+    }
+
+    private function create_saas_result($daas_result,$keys)
+    {
+      $i = 0;
+      foreach ($daas_result as $chave => $daas) {
+        $j = 0;
+        foreach ($daas as $id => $value) {
+          foreach ($keys as $key) {
+            if($key == $id){
+              if($i != 0){
+                $saas_result[$i][$j] = $value;
+                $j++;
+              }
+            }
+          }
+        }
+        $i++;
+      }
+
+      return $saas_result;
     }
 
     private function preenchido_preenchido($fields,$daas_result,$records_param,$fields_param){
@@ -307,68 +351,6 @@ class MainController extends Controller
                   }
               }
           }
-      }
-      return $saas_result;
-    }
-    private function create_palavra($query_decomposed,$fields_param){
-      foreach ($query_decomposed as $key => $value) {
-          $i = 0;
-          if($key == $fields_param){
-            $palavra = implode(",", $value);
-          }
-      }
-      return $palavra;
-    }
-
-    private function create_vector_palavra($palavra,$fields_param){
-      $nova_palavra = "";
-      $j = 0;
-      for($i = 6;$i < strlen($palavra);$i++){
-        if($palavra[$i] != ',' ){
-          $nova_palavra = $nova_palavra."".$palavra[$i];
-        }else{
-          $nova_palavra = $fields_param."/".$nova_palavra;
-          $vetor_palavra[$j] = $nova_palavra;
-          $j++;
-          $nova_palavra ='';
-        }if ($i == strlen($palavra) - 1){
-          $nova_palavra = $fields_param."/".$nova_palavra;
-          $vetor_palavra[$j] = $nova_palavra;
-        }
-      }
-
-      return $vetor_palavra;
-
-    }
-
-    private function create_vetor_id($vetor_palavra,$daas_result){
-      $n = 0;
-      foreach($vetor_palavra as $value) {
-        foreach($daas_result as $value2){
-          $i = 0;
-          foreach($value2 as $value3){
-            if($value == $value3){
-            $vetor_id[$n] = $i;
-            $n++;
-            }
-            $i++;
-          }
-          }
-        }
-        return $vetor_id;
-    }
-
-    private function create_saas_result($daas_result,$vetor_id){
-      $n = 0;
-      $j = 0;
-      foreach($daas_result as $value){
-        if($n != 0){
-          for($i = 0;$i < count($vetor_id);$i++){
-            $saas_result[$j][$i] = $value[$vetor_id[$i]];
-          }
-          $j++;
-        }
-        $n++;
       }
       return $saas_result;
     }
