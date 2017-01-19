@@ -1,0 +1,698 @@
+#  WORDPRESS MAP FOR FOAF; SIOC; ATOM
+        
+
+# -----------------------------------------------
+# prefixes
+# -----------------------------------------------
+     @prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+     @prefix atom: <http://www.w3.org/2005/Atom#> .
+     @prefix db: <tag:localhost/wordpress/27-10-06/docelm#> .
+     @prefix dc: <http://purl.org/dc/elements/1.1/> .
+     @prefix dcterms: <http://purl.org/dc/terms/> .
+     @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+     @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+     @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+     @prefix sioc: <http://rdfs.org/sioc/ns#> .     
+     @prefix xml: <http://www.w3.org/XML/1998/namespace> .
+     @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# -----------------------------------------------
+# Databases
+# -----------------------------------------------
+
+<http://d2rq.org/database>     a d2rq:Database;
+				 	d2rq:jdbcDriver "com.mysql.jdbc.Driver";
+					d2rq:jdbcDSN "jdbc:mysql://localhost/wordpress";        
+					d2rq:password "root";
+					d2rq:username "root";
+					
+         d2rq:dateColumn "wp_comments.comment_date",
+                "wp_comments.comment_date_gmt",
+                "wp_falbum_cache.expires",
+                "wp_links.link_updated",
+                "wp_posts.post_date",
+                "wp_posts.post_date_gmt",
+                "wp_posts.post_modified",
+                "wp_posts.post_modified_gmt",
+                "wp_users.user_registered";        
+         d2rq:numericColumn "wp_categories.cat_ID",
+                "wp_categories.category_count",
+                "wp_categories.category_parent",
+                "wp_comments.comment_ID",
+                "wp_comments.comment_karma",
+                "wp_comments.comment_parent",
+                "wp_comments.comment_post_ID",
+                "wp_comments.user_id",
+                "wp_linkcategories.cat_id",
+                "wp_linkcategories.list_limit",
+                "wp_links.link_category",
+                "wp_links.link_id",
+                "wp_links.link_owner",
+                "wp_links.link_rating",
+                "wp_options.blog_id",
+                "wp_options.option_admin_level",
+                "wp_options.option_height",
+                "wp_options.option_id",
+                "wp_options.option_type",
+                "wp_options.option_width",
+                "wp_post2cat.category_id",
+                "wp_post2cat.post_id",
+                "wp_post2cat.rel_id",
+                "wp_postmeta.meta_id",
+                "wp_postmeta.post_id",
+                "wp_posts.ID",
+                "wp_posts.comment_count",
+                "wp_posts.menu_order",
+                "wp_posts.post_author",
+                "wp_posts.post_category",
+                "wp_posts.post_parent",
+                "wp_usermeta.umeta_id",
+                "wp_usermeta.user_id",
+                "wp_users.ID",
+                "wp_users.user_status";      
+         d2rq:textColumn "wp_categories.cat_name",
+                "wp_categories.category_description",
+                "wp_categories.category_nicename",
+                "wp_comments.comment_agent",
+                "wp_comments.comment_approved",
+                "wp_comments.comment_author",
+                "wp_comments.comment_author_IP",
+                "wp_comments.comment_author_email",
+                "wp_comments.comment_author_url",
+                "wp_comments.comment_content",
+                "wp_comments.comment_type",
+                "wp_falbum_cache.ID",
+                "wp_falbum_cache.data",
+                "wp_linkcategories.auto_toggle",
+                "wp_linkcategories.cat_name",
+                "wp_linkcategories.show_description",
+                "wp_linkcategories.show_images",
+                "wp_linkcategories.show_rating",
+                "wp_linkcategories.show_updated",
+                "wp_linkcategories.sort_desc",
+                "wp_linkcategories.sort_order",
+                "wp_linkcategories.text_after_all",
+                "wp_linkcategories.text_after_link",
+                "wp_linkcategories.text_before_link",
+                "wp_links.link_description",
+                "wp_links.link_image",
+                "wp_links.link_name",
+                "wp_links.link_notes",
+                "wp_links.link_rel",
+                "wp_links.link_rss",
+                "wp_links.link_target",
+                "wp_links.link_url",
+                "wp_links.link_visible",
+                "wp_options.autoload",
+                "wp_options.option_can_override",
+                "wp_options.option_description",
+                "wp_options.option_name",
+                "wp_options.option_value",
+                "wp_postmeta.meta_key",
+                "wp_postmeta.meta_value",
+                "wp_posts.comment_status",
+                "wp_posts.guid",
+                "wp_posts.ping_status",
+                "wp_posts.pinged",
+                "wp_posts.post_content",
+                "wp_posts.post_content_filtered",
+                "wp_posts.post_excerpt",
+                "wp_posts.post_mime_type",
+                "wp_posts.post_name",
+                "wp_posts.post_password",
+                "wp_posts.post_status",
+                "wp_posts.post_title",
+                "wp_posts.post_type",
+                "wp_posts.to_ping",
+                "wp_smileys.Emot",
+                "wp_smileys.File",
+                "wp_usermeta.meta_key",
+                "wp_usermeta.meta_value",
+                "wp_users.display_name",
+                "wp_users.user_activation_key",
+                "wp_users.user_email",
+                "wp_users.user_login",
+                "wp_users.user_nicename",
+                "wp_users.user_pass",
+                "wp_users.user_url"
+                 .
+
+
+# --------------------------------------------------------------------------------------
+#
+# FOAF
+#
+# --------------------------------------------------------------------------------------
+ <http://d2rq.org/ClassMap_FOAFUser>     a d2rq:ClassMap;
+         d2rq:class foaf:Person;
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#user@@wp_users.ID@@" .
+         
+     <http://d2rq.org/FOAFSurname>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='last_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:surname .
+    
+    <http://d2rq.org/FOAFUserAIM>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='aim'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:aimChatID .
+    
+    <http://d2rq.org/FOAFUserDescription>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='description'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property rdfs:comment .
+    
+    <http://d2rq.org/FOAFUserDisplayName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_users.display_name";
+         d2rq:property foaf:name .
+    
+    <http://d2rq.org/FOAFUserEmail>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:pattern "mailto:@@wp_users.user_email@@";
+         d2rq:property foaf:mbox .
+    
+    <http://d2rq.org/FOAFUserFamilyName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='last_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:family_name .
+    
+    <http://d2rq.org/FOAFUserFirstName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='first_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:firstName .
+    
+    <http://d2rq.org/FOAFUserJabber>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='jabber'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:jabberChatID .
+    
+    <http://d2rq.org/FOAFUserNick>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='nickname'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:nick .
+    
+    <http://d2rq.org/FOAFUserURL>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_users.user_url";
+         d2rq:property foaf:homepage .
+    
+    <http://d2rq.org/FOAFUserYahoo>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='yim'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:yahooChatID .
+    
+    <http://d2rq.org/FOAFUsergivenName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='first_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property foaf:givenname .
+         
+# -----------------------------------------------
+#
+# User/ Persons Map
+#
+# -----------------------------------------------
+
+
+# -----------------------------------------------
+#
+# Comment User Map
+#
+# -----------------------------------------------
+
+
+ <http://d2rq.org/ClassMap_FOAFCommentAuthors>     a d2rq:ClassMap;
+         d2rq:class foaf:Person;
+         d2rq:condition "wp_comments.user_id=0";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#commenter@@wp_comments.comment_ID@@" .
+
+    <http://d2rq.org/FOAFCommentAuthor_email>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFCommentAuthors>;
+         d2rq:condition "wp_comments.comment_author_email!=''";
+         d2rq:pattern "mailto:@@wp_comments.comment_author_email@@";
+         d2rq:property foaf:mbox .
+    
+    <http://d2rq.org/FOAFCommentAuthor_url>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFCommentAuthors>;
+         d2rq:column "wp_comments.comment_author_url";
+         d2rq:condition "wp_comments.comment_author_url!=''";
+         d2rq:property foaf:homepage .
+    
+    <http://d2rq.org/FOAFComment_author>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_FOAFCommentAuthors>;
+         d2rq:column "wp_comments.comment_author";
+         d2rq:property foaf:name .
+
+# --------------------------------------------------------------------------------------
+#
+# SIOC
+#
+# --------------------------------------------------------------------------------------
+
+# -----------------------------------------------
+#
+# Feed Map
+#
+# -----------------------------------------------
+
+   <http://d2rq.org/ClassMap_SIOCOptions>     a d2rq:ClassMap;
+         d2rq:class sioc:Forum;
+         d2rq:condition "wp_options.option_name='siteurl'";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "@@wp_options.option_value@@" .
+
+    <http://d2rq.org/SIOCForumName>     a d2rq:DatatypePropertyBridge;
+         d2rq:alias "wp_options as wp_options2";
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCOptions>;
+         d2rq:column "wp_options2.option_value";
+         d2rq:condition "wp_options2.option_name='blogname'";
+         d2rq:property sioc:name .
+
+    <http://d2rq.org/SIOCcontainer>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCOptions>;
+         d2rq:property sioc:container_of;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCPosts> .
+    
+    
+# -----------------------------------------------
+#
+# User/ Persons Map
+#
+# -----------------------------------------------
+ <http://d2rq.org/ClassMap_SIOCUser>     a d2rq:ClassMap;
+         d2rq:class sioc:User;
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#user@@wp_users.ID@@" .
+
+    <http://d2rq.org/SIOCUserCreated>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_users.user_registered";
+         d2rq:datatype xsd:date;
+         d2rq:property sioc:created_at .
+    
+    <http://d2rq.org/SIOCUserCreatorof>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_posts.post_title";
+         d2rq:join "wp_users.ID=wp_posts.post_author";
+         d2rq:property sioc:creator_of .
+    
+    <http://d2rq.org/SIOCUserDescription>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='description'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property rdfs:comment .
+    
+    <http://d2rq.org/SIOCUserEmail>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:pattern "mailto:@@wp_users.user_email@@";
+         d2rq:property sioc:email .
+    
+    <http://d2rq.org/SIOCUserFirstName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='first_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property sioc:first_name .
+    
+    <http://d2rq.org/SIOCUserFunction>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_users.user_status";
+         d2rq:property sioc:has_function .
+    
+    <http://d2rq.org/SIOCUserLastName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='last_name'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property sioc:last_name .
+    
+    <http://d2rq.org/SIOCUserName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCUser>;
+         d2rq:column "wp_users.display_name";
+         d2rq:property sioc:name .
+                  
+# -----------------------------------------------
+#
+# Post Map
+#
+# -----------------------------------------------
+ <http://d2rq.org/ClassMap_SIOCPosts>     a d2rq:ClassMap;
+         d2rq:class sioc:Post;
+         d2rq:condition "wp_posts.post_status='publish'";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "http://localhost/wordpress?p=@@wp_posts.ID@@" .
+
+    <http://d2rq.org/SIOCCommentHasReply>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:join "wp_comments.comment_post_ID=wp_posts.ID";
+         d2rq:property sioc:has_reply;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCComments> .
+ 
+ <http://d2rq.org/SIOCHasContainer>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:property sioc:has_container;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCOptions> .
+    
+    <http://d2rq.org/SIOCPostContent>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:column "wp_posts.post_content";
+         d2rq:property sioc:content .
+    
+    <http://d2rq.org/SIOCPostCreator>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:join "wp_posts.post_author=wp_users.ID";
+         d2rq:property sioc:has_creator;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCUser> .
+    
+    <http://d2rq.org/SIOCPostDate>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:column "wp_posts.post_date";
+         d2rq:condition "wp_posts.post_date != '0000'";
+         d2rq:datatype xsd:dateTime;
+         d2rq:property sioc:created_at .
+    
+    <http://d2rq.org/SIOCPostModified>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:column "wp_posts.post_modified";
+         d2rq:condition "wp_posts.post_date != '0000'";
+         d2rq:datatype xsd:dateTime;
+         d2rq:property sioc:modified_at .
+    
+    <http://d2rq.org/SIOCPostReply>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCPosts>;
+         d2rq:join "wp_posts.ID=wp_comments.comment_post_ID";
+         d2rq:property sioc:has_reply;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCComments> .    
+# -----------------------------------------------
+#
+# Comment Map
+#
+# -----------------------------------------------
+  
+  <http://d2rq.org/ClassMap_SIOCComments>     a d2rq:ClassMap;
+         d2rq:class sioc:Post;
+         d2rq:condition "wp_comments.comment_approved='1'",
+                "wp_posts.ID=wp_comments.comment_post_ID";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "http://localhost/wordpress?p=@@wp_posts.ID@@#comment-@@wp_comments.comment_ID@@" .
+         
+    <http://d2rq.org/DCCommentUser>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:condition "wp_comments.user_id!=0";
+         d2rq:join "wp_comments.user_id=wp_users.ID";
+         d2rq:property dc:creator;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCUser> .
+             
+  <http://d2rq.org/DCCommentDate>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:column "wp_comments.comment_date";
+         d2rq:condition "wp_comments.comment_date != '0000'";
+         d2rq:datatype xsd:dateTime;
+         d2rq:property dc:date .
+
+    <http://d2rq.org/SIOCCommentAuthor>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:condition "wp_comments.user_id!=0";
+         d2rq:join "wp_comments.user_id=wp_users.ID";
+         d2rq:property sioc:has_creator;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCUser> .
+
+    <http://d2rq.org/SIOCCommentContent>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:column "wp_comments.comment_content";
+         d2rq:property sioc:content .
+    
+    <http://d2rq.org/SIOCCommentDate>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:column "wp_comments.comment_date";
+         d2rq:condition "wp_comments.comment_date != '0000'";
+         d2rq:datatype xsd:dateTime;
+         d2rq:property sioc:created_at .
+    
+    <http://d2rq.org/SIOCCommentReplyOf>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCComments>;
+         d2rq:join "wp_posts.ID=wp_comments.comment_post_ID";
+         d2rq:property sioc:reply_of;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_SIOCPosts> .
+     
+  
+# -----------------------------------------------
+#
+# Comment Author Map
+#
+# -----------------------------------------------
+  <http://d2rq.org/ClassMap_SIOCCommentAuthors>     a d2rq:ClassMap;
+         d2rq:class sioc:User;
+         d2rq:condition "wp_comments.user_id=0";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#commenter@@wp_comments.comment_ID@@" .         
+         
+
+    <http://d2rq.org/SIOCCommentAuthor_email>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCCommentAuthors>;
+         d2rq:condition "wp_comments.comment_author_email!=''";
+         d2rq:pattern "mailto:@@wp_comments.comment_author_email@@";
+         d2rq:property sioc:email .
+    
+    <http://d2rq.org/SIOCCommentAuthor_url>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCCommentAuthors>;
+         d2rq:column "wp_comments.comment_author_url";
+         d2rq:condition "wp_comments.comment_author_url!=''";
+         d2rq:property sioc:homepage .
+           
+    <http://d2rq.org/SIOCComment_author>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_SIOCCommentAuthors>;
+         d2rq:column "wp_comments.comment_author";
+         d2rq:property sioc:name .
+             
+         
+
+# --------------------------------------------------------------------------------------
+#
+# ATOM
+#
+# --------------------------------------------------------------------------------------
+# -----------------------------------------------
+#
+# User/ Persons Map
+#
+# -----------------------------------------------
+ <http://d2rq.org/ClassMap_ATOMUser>     a d2rq:ClassMap;
+         d2rq:class atom:author;
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#user@@wp_users.ID@@" .
+
+    <http://d2rq.org/ATOMUserDescription>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='description'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property rdfs:comment .
+    
+    <http://d2rq.org/ATOMUserEmail>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMUser>;
+         d2rq:column "wp_users.user_email";
+         d2rq:property atom:email .
+    
+    <http://d2rq.org/ATOMUserName>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMUser>;
+         d2rq:column "wp_usermeta.meta_value";
+         d2rq:condition "wp_usermeta.meta_key='nickname'";
+         d2rq:join "wp_users.ID=wp_usermeta.user_ID";
+         d2rq:property atom:name .
+    
+    <http://d2rq.org/ATOMUserURL>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMUser>;
+         d2rq:column "wp_users.user_url";
+         d2rq:property atom:uri .
+         
+         
+# -----------------------------------------------
+#
+# Feed Map
+#
+# -----------------------------------------------
+
+ <http://d2rq.org/ClassMap_ATOMFeed>     a d2rq:ClassMap;
+         d2rq:class atom:feed;
+         d2rq:condition "wp_options.option_name='siteurl'";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "@@wp_options.option_value@@" .
+         
+    <http://d2rq.org/ATOMFeedComments>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:property atom:entry;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_ATOMComments> .
+    
+    <http://d2rq.org/ATOMFeedCreator>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:join "wp_posts.post_author=wp_users.ID";
+         d2rq:property atom:author;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_ATOMUser> .
+    
+    <http://d2rq.org/ATOMFeedID>     a d2rq:DatatypePropertyBridge;
+         d2rq:alias "wp_options as wp_options2";
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:column "wp_options2.option_value";
+         d2rq:condition "wp_options2.option_name='siteurl'";
+         d2rq:property atom:id .
+    
+    <http://d2rq.org/ATOMFeedLink>     a d2rq:ObjectPropertyBridge;
+         d2rq:alias "wp_options as wp_options2";
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:column "wp_options2.option_value";
+         d2rq:condition "wp_options2.option_name='siteurl'";
+         d2rq:property atom:link .
+    
+    <http://d2rq.org/ATOMFeedPosts>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:property atom:entry;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_ATOMPosts> .
+    
+    <http://d2rq.org/ATOMFeedSubTitle>     a d2rq:DatatypePropertyBridge;
+         d2rq:alias "wp_options as wp_options2";
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:column "wp_options2.option_value";
+         d2rq:condition "wp_options2.option_name='blogdescription'";
+         d2rq:property atom:subtitle .
+    
+    <http://d2rq.org/ATOMFeedTitle>     a d2rq:DatatypePropertyBridge;
+         d2rq:alias "wp_options as wp_options2";
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMFeed>;
+         d2rq:column "wp_options2.option_value";
+         d2rq:condition "wp_options2.option_name='blogname'";
+         d2rq:property atom:title .         
+
+# -----------------------------------------------
+#
+# Post Map
+#
+# -----------------------------------------------
+ <http://d2rq.org/ClassMap_ATOMPosts>     a d2rq:ClassMap;
+         d2rq:class atom:entry;
+         d2rq:condition "wp_posts.post_status='publish'";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "http://localhost/wordpress?p=@@wp_posts.ID@@" .
+
+    <http://d2rq.org/ATOMPostContent>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:column "wp_posts.post_content";
+         d2rq:property atom:content .
+    
+    <http://d2rq.org/ATOMPostCreator>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:join "wp_posts.post_author=wp_users.ID";
+         d2rq:property atom:author;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_ATOMUser> .
+    
+    <http://d2rq.org/ATOMPostID>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:column "wp_posts.ID";
+         d2rq:property atom:id .
+    
+    <http://d2rq.org/ATOMPostLink>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:pattern "http://localhost/wordpress?p=@@wp_posts.ID@@";
+         d2rq:property atom:link .
+    
+    <http://d2rq.org/ATOMPostTitle>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:column "wp_posts.post_title";
+         d2rq:property atom:title .
+         
+    <http://d2rq.org/ATOMpostsUpdated>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMPosts>;
+         d2rq:column "wp_posts.post_modified";
+         d2rq:property atom:updated .
+    
+            
+
+# -----------------------------------------------
+#
+# Comment Map
+#
+# -----------------------------------------------
+<http://d2rq.org/ClassMap_ATOMCommentAuthors>     a d2rq:ClassMap;
+         d2rq:class atom:author;
+         d2rq:condition "wp_comments.user_id=0";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "tag:localhost/wordpress/27-10-06/docelm#commenter@@wp_comments.comment_ID@@" .
+         
+   <http://d2rq.org/ATOMCommentAuthor_email>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMCommentAuthors>;
+         d2rq:condition "wp_comments.comment_author_email!=''";
+         d2rq:pattern "mailto:@@wp_comments.comment_author_email@@";
+         d2rq:property atom:email .
+
+   <http://d2rq.org/ATOMCommentAuthor_url>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMCommentAuthors>;
+         d2rq:column "wp_comments.comment_author_url";
+         d2rq:condition "wp_comments.comment_author_url!=''";
+         d2rq:property atom:uri .
+         
+   <http://d2rq.org/ATOMComment_author>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMCommentAuthors>;
+         d2rq:column "wp_comments.comment_author";
+         d2rq:property atom:name .
+         
+# -----------------------------    
+
+ <http://d2rq.org/ClassMap_ATOMComments>     a d2rq:ClassMap;
+         d2rq:class atom:entry;
+         d2rq:condition "wp_comments.comment_approved='1'",
+                "wp_posts.ID=wp_comments.comment_post_ID";
+         d2rq:dataStorage <http://d2rq.org/database>;
+         d2rq:uriPattern "http://localhost/wordpress?p=@@wp_posts.ID@@#comment-@@wp_comments.comment_ID@@" .
+ 
+ <http://d2rq.org/ATOMCommentAuthor>     a d2rq:ObjectPropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMComments>;
+         d2rq:condition "wp_comments.user_id!=0";
+         d2rq:join "wp_comments.user_id=wp_users.ID";
+         d2rq:property atom:author;
+         d2rq:refersToClassMap <http://d2rq.org/ClassMap_ATOMUser> .
+         
+    <http://d2rq.org/ATOMCommentContent>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMComments>;
+         d2rq:column "wp_comments.comment_content";
+         d2rq:property atom:content .         
+         
+        <http://d2rq.org/ATOMCommentID>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMComments>;
+         d2rq:column "wp_comments.comment_ID";
+         d2rq:property atom:id .
+         
+    <http://d2rq.org/ATOMCommentTitle>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMComments>;
+         d2rq:pattern "comment-@@wp_comments.comment_id@@";
+         d2rq:property atom:title .
+    
+    <http://d2rq.org/ATOMCommentUpdated>     a d2rq:DatatypePropertyBridge;
+         d2rq:belongsToClassMap <http://d2rq.org/ClassMap_ATOMComments>;
+         d2rq:column "wp_comments.comment_date";
+         d2rq:property atom:updated . 
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
