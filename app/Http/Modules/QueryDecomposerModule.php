@@ -9,11 +9,18 @@ class QueryDecomposerModule extends Module {
      * @param $query string
      * @return mixed array
      */
-    public function decomposer($query2)
+    public function decomposer($query)
     {
-        $jsonArray2 =  QueryDecomposerModule::decomposerMySql($query2) ;//->decomposerMySql($query2);
-       //$jsonArray2 =  QueryDecomposerModule::decomposerMongoDB(query2) ;//->decomposerMySql($query2);
-
+        $TipoBd = trim(substr($query, 6,3 ));
+        if($TipoBd === 'db.' )
+                $jsonArray2 =    self::decomposerMongoDB($query) ;
+        elseif ($TipoBd === 'SEL')
+            $jsonArray2 =  QueryDecomposerModule::decomposerMySql($query) ;
+        else
+        {
+            print_r( "Banco não identificado");
+            exit();
+        }
         return $jsonArray2;
     }
 
@@ -45,59 +52,69 @@ class QueryDecomposerModule extends Module {
 
         // pega a posição de cada palavra reservada da linguagem
         $indexes[] = strpos($sql, "db.");//from 0
-        $indexes[] = strpos($sql, ".find({");//where 1
-        $indexes[] = strpos($sql, "},{");// select 2
-        $indexes[] = strpos($sql, "})");// fim select 3
-        $indexes[] = strpos($sql, ".sort({");//order by 4
-        //$indexes[] = strpos($sql, "limit");//limit 5
+        $indexes[] = strpos($sql, ".find");//where 1
+        $indexes[] = strpos($sql, "sort");//order by 2
+        $indexes[] = strpos($sql, "limit");//limit 3
 
         // guarda os campos, dataset, filtros, ordem e limite
-        $jsonArray["fields"]    = $this->getFields2($sql, $indexes[2] +3,$indexes[3]);//equivale ao select
+        $jsonArray["fields"]    = $this->getFields2($sql,$indexes[1] + 6 );//equivale ao select
         $jsonArray["dataset"]   = $this->getDataset2($sql, $indexes[0]+3 ,$indexes[1]);//from  (ok)
-        $jsonArray["filters"]   = $this->getFilters2($sql,$indexes[1] + 7, $indexes[2]  );//where  (ok)
-       // $jsonArray["order"]     = $indexes[3] === false ? false : $this->getOrder2($sql, $indexes[4] + 7, $indexes, 4);//order by
-       // $jsonArray["limit"]     = $indexes[3] === false ? false : $this->getLimit2($sql, $indexes[5] + 5);//limit
+        $jsonArray["filters"]   = $this->getFilters2($sql,$indexes[1] + 6 );//where
+        $jsonArray["order"]     = $indexes[3] === false ? false : $this->getOrder2($sql, $indexes[2] + 6);//order by
+        $jsonArray["limit"]     = $indexes[3] === false ? false : $this->getLimit2($sql, $indexes[3] + 6);//limit
 
         return $jsonArray;
     }
 
 
-
-
-    private function getOrder2($sql, $begin, $indexes, $start)
+    private function getDataset2($sql, $begin, $indexes)
     {
-        for ($i = $start; $i < count($indexes); $i++) {
-            if ($indexes[$i] !== false) {
-                return trim(substr($sql, $begin, $indexes[$i] - $begin));
-            }
-        }
+        return trim(substr($sql, $begin, ($indexes - $begin)));
+    }
 
-        return trim(substr($sql, $begin));
+    private function getFilters2($sql, $begin )
+    {
+        $str_fields = trim(substr($sql, $begin  ));
+
+        $indexes[] = strpos($str_fields, "}");
+
+           return  str_ireplace ("'","", str_ireplace( "}","",
+               str_ireplace(":", "=", trim(substr($str_fields,1,($indexes[0]))))));
+    }
+
+    private function getFields2($sql, $begin)
+    {
+        $str_fields = str_ireplace (" ","",trim(substr($sql, $begin  ))) ;
+        $indexes[] = strpos($str_fields, "},{");
+        $indexes[] = strpos($str_fields, "})");
+        $str_fields = trim(substr($str_fields,  $indexes[0] +3 ,($indexes[1] - $indexes[0]-3)));
+        $ArraySelect = explode(",", str_ireplace("'", "", $str_fields));
+        $i = 0 ;
+        foreach ($ArraySelect as $value)
+        {
+            $indexes2[] = strpos($value, ":");
+            $value =  trim(substr($value,0,$indexes2[$i])) ; //$value ;
+            $ArraySelect[$i] = $value ;
+            $i ++ ;
+        }
+        return  $ArraySelect ;
+    }
+
+    private function getOrder2($sql, $begin)
+    {
+        $str_fields = trim(substr($sql, $begin ));
+        $indexes[] = strpos($str_fields, ":");
+        return     str_ireplace ("'","", trim(substr($str_fields, 0 ,$indexes[0]-1 )));
     }
 
     private function getLimit2($sql, $begin)
     {
-        return trim(substr($sql, $begin));
+        $str_fields = trim(substr($sql, $begin  ));
+        $indexes[] = strpos($str_fields, ")");
+        return trim(substr($str_fields, 0 ,$indexes[0] ));
     }
 
 
-    private function getFields2($sql, $inicio ,$fim)
-    {
-        $str_fields = trim(substr($sql, $inicio, $fim - $inicio ));
-        return explode(",", str_ireplace(" ", "", $str_fields));
-    }
-
-    private function getDataset2($sql, $inicio ,$fim)
-    {
-        $str_fields = trim(substr($sql, $inicio, $fim - $inicio ));
-        return explode(",", str_ireplace(" ", "", $str_fields));
-    }
-
-    private function getFilters2($sql, $inicio ,$fim)
-    {
-        $str_fields = trim(substr($sql, $inicio, $fim - $inicio ));
-          return explode(",", str_ireplace(" ", "", $str_fields));
-    }
 
 
 
