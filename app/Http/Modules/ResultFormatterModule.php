@@ -48,14 +48,14 @@ class ResultFormatterModule extends Module {
         $daas_result = simplexml_load_string($daas_result);
         $fields_param = $api_params->fields_param;
         $fields = $query_decomposed["fields"];
-        $fields[0] = 'name';
 
         $i = 0;
         foreach ($fields as $field) {
             $elements = $daas_result->xpath('////'.$field);
             $j = 0;
             foreach ($elements as $element) {
-                $saas_result[$j][$i] = $element;
+                $value = (string)$element;
+                $saas_result[$j][$field] = $value;
                 $j++;
             }
             $i++;
@@ -69,57 +69,56 @@ class ResultFormatterModule extends Module {
         $records_param = $api_params->records_param;
         $fields_param = $api_params->fields_param;
         $fields = $query_decomposed["fields"];
-        $fields[0] = 'name';
 
         $daas_result = $this->csv_to_array($daas_result);
         $keys = $this->find_keys_attributes($fields,$daas_result[0]);
-        $saas_result = $this->create_saas_result($daas_result,$keys);
+        $saas_result = $this->create_saas_result($daas_result,$keys,$fields);
         return json_encode($saas_result);
     }
 
-    private function csv_to_array($daas_result)
+    private function csv_to_array($daas_result) //transforma csv em um array
     {
         $lines = explode(PHP_EOL, $daas_result);
         $array = array();
         foreach ($lines as $line) {
             $array[] = str_getcsv($line);
         }
+
         return $array;
     }
 
-    private function find_keys_attributes($fields,$daas_result)
+    private function find_keys_attributes($fields,$daas_result) //funcao para encontrar ids dos campos
     {
         $i = 0;
-        foreach ($daas_result as $key => $daas) {
-            foreach ($fields as $field) {
-                if($daas == $field){
-                    $vetor_keys[$i] = $key;
-                    $i++;
-                }
+        foreach ($fields as $key_fields => $value_fields) { //fields  sao os campos de filtragem:name etc.
+          foreach ($daas_result as $key_daas => $value_daas) { //daas_result e o primeiro array com os nomes e os ids vindos do daas
+            if($value_fields == $value_daas){
+              $vetor_keys[$i] = $key_daas;
+              $i++;
             }
+          }
         }
         return $vetor_keys;
     }
 
-    private function create_saas_result($daas_result,$keys)
+    private function create_saas_result($daas_result,$ids,$fields) //funcao para criar o resultado para enviar ao saas
     {
-        $i = 0;
-        foreach ($daas_result as $chave => $daas) {
-            $j = 0;
-            foreach ($daas as $id => $value) {
-                foreach ($keys as $key) {
-                    if($key == $id){
-                        if($i != 0){
-                            $saas_result[$i][$j] = $value;
-                            $j++;
-                        }
-                    }
-                }
+      $i = 0;
+      unset($daas_result[0]); //remover elemento do array que contem os campos desnecessarios
+      foreach ($daas_result as $key_result => $daas) {
+        $j = 0;
+        foreach ($ids as $key_ids => $id) {
+          foreach ($daas as $key_daas => $value) {
+            if($id == $key_daas){
+              $nome = $fields[$j];
+              $saas_result[$i][$nome] = $value; //adicionar campo para json
+              $j++;
             }
-            $i++;
+          }
         }
-
-        return $saas_result;
+        $i++;
+      }
+      return $saas_result;
     }
 
     private function preenchido_preenchido($fields,$daas_result,$records_param,$fields_param){

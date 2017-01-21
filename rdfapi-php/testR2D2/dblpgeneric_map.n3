@@ -1,0 +1,169 @@
+# ----------------------------------------------------------------------------------
+# ---                         R2D2 GENERIC MAP GENERATOR                         ---
+# generic Map dblp_map.rdf
+#
+# for database: localhost
+# created at: 07-04-43,20-11-06
+# ----------------------------------------------------------------------------------
+
+
+# -------------------------------------------------------------------------------------------
+# Namespace declaration
+# -------------------------------------------------------------------------------------------
+@prefix : <http://d2rq.org/> .
+@prefix db: <tag:localhost/dblp/20-11-06/docelm#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix d2rq: <http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#> .
+@prefix r2d2: <http://bis.informatik.uni-leipzig.de/r2d2/0.1#> .
+
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix dblp: <http://www4.wiwiss.fu-berlin.de/dblp/terms.rdf#> .
+
+# -------------------------------------------------------------------------------------------
+# Database information
+# -------------------------------------------------------------------------------------------
+:database a d2rq:Database;
+   d2rq:jdbcDriver "com.mySQL.jdbc.Driver";
+   d2rq:jdbcDSN "jdbc:mySQL://localhost/dblp";
+   d2rq:username "root";
+   d2rq:password "root";
+      d2rq:textColumn "authors.recordID";
+      d2rq:numericColumn "authors.personID";
+      d2rq:textColumn "editors.recordID";
+      d2rq:numericColumn "editors.personID";
+      d2rq:numericColumn "people.ID";
+      d2rq:textColumn "people.name";
+      d2rq:textColumn "records.ID";
+      d2rq:numericColumn "records.recordtype";
+      d2rq:textColumn "records.title";
+      d2rq:textColumn "records.url";
+      d2rq:textColumn "records.crossref";
+      d2rq:textColumn "records.isbn";
+      d2rq:numericColumn "records.year";
+      d2rq:textColumn "records.journal";
+      d2rq:textColumn "records.booktitle"
+      .
+
+
+
+# -------------------------------------------------------------------------------------------
+# BEGIN GENERIC MAPPING OF ALL TABLES AND COLUMNS 
+# -------------------------------------------------------------------------------------------
+
+# -------------------------------------------------------------------------------------------
+# Table people
+# -------------------------------------------------------------------------------------------
+:classMap_people a d2rq:ClassMap;
+   d2rq:dataStorage :database ;
+   d2rq:uriPattern "person@@people.ID@@" ;
+   d2rq:class foaf:Person
+   .
+
+:propertyBridge_people_ID a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_people ;
+   d2rq:property db:people_ID ;
+   d2rq:column "people.ID"
+   .
+
+:propertyBridge_people_name a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_people ;
+   d2rq:property foaf:name;
+   d2rq:column "people.name"
+   .
+   
+
+
+# -------------------------------------------------------------------------------------------
+# Table records
+# -------------------------------------------------------------------------------------------
+:classMap_records a d2rq:ClassMap;
+   d2rq:dataStorage :database ;
+   d2rq:uriPattern "records@@records.ID@@" ;
+   d2rq:class foaf:Document
+   .
+
+:propertyBridge_records_recordtype a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property rdf:type ;
+   d2rq:column "records.recordtype"
+   . 
+   
+:propertyBridge_records_title a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dc:title;
+   d2rq:column "records.title"
+   .  
+   
+:propertyBridge_records_url a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property rdfs:seeAlso ;
+   d2rq:column "records.url"
+   .   
+   
+:propertyBridge_Crossref a d2rq:ObjectPropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dblp:crossref ;
+    d2rq:refersToClassMap :classMap_records;
+    d2rq:alias "Records AS CrossrefRecords";
+    d2rq:join "Records.crossref = CrossrefRecords.ID"
+    .
+    
+:propertyBridge_records_isbn a d2rq:ObjectPropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property owl:sameAs ;
+   d2rq:pattern "urn:isbn:@@records.isbn@@"
+   .    
+    
+:propertyBridge_AmazonLinl a d2rq:ObjectPropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property rdfs:seeAlso ;
+   d2rq:pattern "http://amazon.com/s/ref=nb_ss_gw?field-keywords=@@records.isbn@@"
+   .    
+
+:propertyBridge_records_year a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dc:date ;
+   d2rq:column "records.year";
+   d2rq:datatype xsd:gYear;
+   d2rq:condition "records.year > 0"
+   .  
+   
+:propertyBridge_records_journal a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dblp:journal ;
+   d2rq:column "records.journal"
+   .
+
+:propertyBridge_records_booktitle a d2rq:DatatypePropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dblp:booktitle ;
+   d2rq:column "records.booktitle"
+   .    
+   
+:propertyBridge_recordAuthor a d2rq:ObjectPropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dc:creator ;
+   d2rq:refersToClassMap :classMap_people;
+   d2rq:join "Records.ID = Authors.recordID";
+   d2rq:join "Authors.personID = People.ID"
+   . 
+
+:propertyBridge_recordEditor a d2rq:ObjectPropertyBridge ;
+   d2rq:belongsToClassMap :classMap_records ;
+   d2rq:property dblp:editor ;
+   d2rq:refersToClassMap :classMap_people;
+   d2rq:join "records.ID = editors.recordID";
+   d2rq:join "editors.personID = People.ID"
+   .       
+
+
+
+
+
