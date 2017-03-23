@@ -13,6 +13,3 @@
 
 Route::post('daas', 'MainController@daas');
 Route::get('/', 'MainController@index');
-Route::get('/dis', function(){
-	return File::get('dis.json');
-});
