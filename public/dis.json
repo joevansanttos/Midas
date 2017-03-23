@@ -1,0 +1,22 @@
+{
+	"nyc-wifi-hotspot-locations": {
+		"domain": "http://public.opendatasoft.com",
+		"search_path": "/api/records/1.0/search/",
+		"query_param": "q",
+		"sort_param": "sort",
+		"limit_param": "rows",
+		"dataset_param": "dataset",
+		"records_param": "records",
+		"fields_param": "fields"
+	},
+	"v8qe-fx6p.json": {
+		"domain": "http://data.cityofnewyork.us",
+		"search_path": "/resource/",
+		"query_param": "$where",
+		"sort_param": "$order",
+		"limit_param": "$limit",
+		"dataset_param": "",
+		"records_param": "",
+		"fields_param": ""
+	}
+}

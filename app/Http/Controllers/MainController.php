@@ -35,14 +35,14 @@ class MainController extends Controller
         $query_decomposed = new QueryDecomposerModule();
         $query_decomposed = $query_decomposed->decomposer($query);
 
-
-        // chamada da função que consulta ao banco para pegar as informações do DaaS informado na query
-        $daas_model = new DaaSModel;
-        $api_params = $daas_model->get_provider_api($query_decomposed["dataset"]);
+        // consulta o DIS (arquivo: /public/dis.json)
+        $dis = file_get_contents('dis.json');
+        $dis = json_decode($dis, true);
+        $api_params = (object) $dis[$query_decomposed["dataset"]];
 
         // chamada da função que contrói a url para a API
         $query_builder = new QueryBuilderModule();
-        $daas_request_url = $query_builder->builder($api_params[0], $query_decomposed);
+        $daas_request_url = $query_builder->builder($api_params, $query_decomposed);
 
 
         // requisita ao DaaS as informações
@@ -52,7 +52,7 @@ class MainController extends Controller
         // formata o resultado para ser compatível com o SaaS
         //$result = $this->result_formatter(json_decode(utf8_encode($daas_result)), $query_decomposed, $api_params[0]);
         $result_formatter = new ResultFormatterModule();
-        $result = $result_formatter->formatter($daas_result, $query_decomposed, $api_params[0]);
+        $result = $result_formatter->formatter($daas_result, $query_decomposed, $api_params);
 
         // envia para a view o resultado formatado
         return view('daas')->with(compact('result'));
