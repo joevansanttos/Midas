@@ -52,18 +52,16 @@ class MainController extends Controller
             $query_builder = new QueryBuilderModule();
             $daas_request_url = $query_builder->builder($api_params, $query_decomposed['consulta1']);
             $daas_result = file_get_contents($daas_request_url, false);
-        }
+          }
         }else{
+            $daas_model = new DaaSModel;
+            $api_params = $daas_model->get_provider_api($query_decomposed['consulta1']['dataset']);
 
-          $daas_model = new DaaSModel;
-          $api_params = $daas_model->get_provider_api($query_decomposed['consulta1']['dataset']);
-
-          $query_builder = new QueryBuilderModule();
-          $daas_request_url = $query_builder->builder($api_params, $query_decomposed['consulta1']);
-          $daas_result = file_get_contents($daas_request_url, false);
-          $query_decomposed['consulta1']['filters'] = "city = 'New York'";
-          $query_decomposed['consulta1'] = $query_decomposed;
-
+            $query_builder = new QueryBuilderModule();
+            $daas_request_url = $query_builder->builder($api_params, $query_decomposed['consulta1']);
+            $daas_result = file_get_contents($daas_request_url, false);
+            //$query_decomposed['consulta1']['filters'] = "city = 'New York'";
+           // $query_decomposed['consulta1'] = $query_decomposed;
         }
         
         // formata o resultado para ser compatível com o SaaS
