@@ -54,35 +54,15 @@ class MainController extends Controller
             $daas_result = file_get_contents($daas_request_url, false);
         }
         }else{
-            $tamanho =  count( $query_decomposed);
-            $daas_request_url = null;
-            if ($tamanho > 1)
-                $tamanho = $tamanho -1 ;
 
-            for ($i = 0; $i < $tamanho; )
-            {
-                $i++ ;
-                $idArray = "consulta" ."$i" ;
-
-                // chamada da função que consulta ao banco para pegar as informações do DaaS informado na query
-                $daas_model = new DaaSModel;
-                $api_params = $daas_model->get_provider_api($query_decomposed[$idArray]["dataset"]);
-
-                // chamada da função que contrói a url para a API
-                $query_builder = new QueryBuilderModule();
-                $daas_request_url = $query_builder->builder($api_params[0], $query_decomposed[$idArray]);
-               // $daas_request_url[$i-1] = $query_builder->builder($api_params[0], $query_decomposed[$idArray]);
-
-            }
-            $daas_result = file_get_contents($daas_request_url, false);
-          /*$daas_model = new DaaSModel;
+          $daas_model = new DaaSModel;
           $api_params = $daas_model->get_provider_api($query_decomposed['consulta1']['dataset']);
 
           $query_builder = new QueryBuilderModule();
-          $daas_request_url = $query_builder->builder($api_params, $query_decomposed);
+          $daas_request_url = $query_builder->builder($api_params, $query_decomposed['consulta1']);
           $daas_result = file_get_contents($daas_request_url, false);
-          $query_decomposed['filters'] = "city = 'New York'";
-          $query_decomposed['consulta1'] = $query_decomposed;*/
+          $query_decomposed['consulta1']['filters'] = "city = 'New York'";
+          $query_decomposed['consulta1'] = $query_decomposed;
 
         }
         
