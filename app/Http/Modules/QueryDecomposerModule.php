@@ -16,6 +16,7 @@ class QueryDecomposerModule extends Module {
         $TipoBd = trim(substr($query, 6,3 ));
         if($TipoBd === 'db.' )
         {
+
             $query_decomposer = new DecomposerMongo();
             $jsonArray2 = $query_decomposer-> decomposer($query);
             //$jsonArray2 =    self::decomposerMongoDB($query) ;
@@ -25,6 +26,7 @@ class QueryDecomposerModule extends Module {
         {
             $query_decomposer = new DecomposerMysql();
             $jsonArray2 = $query_decomposer-> decomposer($query);
+
         }
         else
         {

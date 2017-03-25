@@ -40,7 +40,7 @@ class DecomposerMongo extends QueryDecomposerModule {
 
         $jsonArray["join"] = null;
         $jsonArray["consulta1"] = $this->gerarInfor($sql);
-        $jsonArray["consulta2"] = null;
+          $jsonArray["consulta2"] = null;
         //$jsonArray = array_filter ( $jsonArray);
 
         return $jsonArray;
@@ -61,6 +61,7 @@ class DecomposerMongo extends QueryDecomposerModule {
         $jsonArrayInfo["filters"]   = $this->getFilters($sql,$indexes[1] + 6 );//where
         $jsonArrayInfo["order"]     = $indexes[3] === false ? false : $this->getOrder($sql, $indexes[2] + 6);//order by
         $jsonArrayInfo["limit"]     = $indexes[3] === false ? false : $this->getLimit($sql, $indexes[3] + 6);//limit
+
         $jsonArray["info"] =  ($jsonArrayInfo);
 
 
@@ -78,8 +79,8 @@ class DecomposerMongo extends QueryDecomposerModule {
 
         $indexes[] = strpos($str_fields, "}");
 
-        return  str_ireplace ("'","", str_ireplace( "}","",
-            str_ireplace(":", "=", trim(substr($str_fields,1,($indexes[0]))))));
+        return  str_ireplace ("","", str_ireplace( "}","",
+            str_ireplace("':", "=", trim(substr($str_fields,1,($indexes[0]))))));
     }
 
     private function getFields($sql, $begin)
