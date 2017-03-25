@@ -10,27 +10,61 @@ class DecomposerMongo extends QueryDecomposerModule {
      * @return mixed array
      */
 
+    var $sqlmin;
+
+    /**
+     * @return mixed
+     */
+    public function getSqlmin()
+    {
+        return $this->sqlmin;
+    }
+
+    /**
+     * @param mixed $sqlmin
+     */
+    public function setSqlmin($sqlmin)
+    {
+        $this->sqlmin = $sqlmin;
+    }
+
 
 
     public function decomposer($query)
     {
         // transforma em minusculas
-        $sql = strtolower(trim($query));
+        $sql = $query;
 
-        // pega a posição de cada palavra reservada da linguagem
-        $indexes[] = strpos($sql, "db.");//from 0
-        $indexes[] = strpos($sql, ".find");//where 1
-        $indexes[] = strpos($sql, "sort");//order by 2
-        $indexes[] = strpos($sql, "limit");//limit 3
 
-        // guarda os campos, dataset, filtros, ordem e limite
-        $jsonArray["fields"]    = $this->getFields($sql,$indexes[1] + 6 );//equivale ao select
-        $jsonArray["dataset"]   = $this->getDataset($sql, $indexes[0]+3 ,$indexes[1]);//from  (ok)
-        $jsonArray["filters"]   = $this->getFilters($sql,$indexes[1] + 6 );//where
-        $jsonArray["order"]     = $indexes[3] === false ? false : $this->getOrder($sql, $indexes[2] + 6);//order by
-        $jsonArray["limit"]     = $indexes[3] === false ? false : $this->getLimit($sql, $indexes[3] + 6);//limit
+        $this->setSqlmin(strtolower(trim($query))) ;//
+
+        $jsonArray["join"] = null;
+        $jsonArray["consulta1"] = $this->gerarInfor($sql);
+        $jsonArray["consulta2"] = null;
+        $jsonArray = array_filter ( $jsonArray);
 
         return $jsonArray;
+    }
+
+    public function gerarInfor($sql)
+    {
+
+        // pega a posição de cada palavra reservada da linguagem
+        $indexes[] = strpos( $this->getSqlmin(), "db.");//from 0
+        $indexes[] = strpos( $this->getSqlmin(), ".find");//where 1
+        $indexes[] = strpos( $this->getSqlmin(), "sort");//order by 2
+        $indexes[] = strpos( $this->getSqlmin(), "limit");//limit 3
+
+        // guarda os campos, dataset, filtros, ordem e limite
+        $jsonArrayInfo["fields"]    = $this->getFields($sql,$indexes[1] + 6 );//equivale ao select
+        $jsonArrayInfo["dataset"]   = $this->getDataset($sql, $indexes[0]+3 ,$indexes[1]);//from  (ok)
+        $jsonArrayInfo["filters"]   = $this->getFilters($sql,$indexes[1] + 6 );//where
+        $jsonArrayInfo["order"]     = $indexes[3] === false ? false : $this->getOrder($sql, $indexes[2] + 6);//order by
+        $jsonArrayInfo["limit"]     = $indexes[3] === false ? false : $this->getLimit($sql, $indexes[3] + 6);//limit
+        $jsonArray["info"] =  ($jsonArrayInfo);
+
+
+        return $jsonArrayInfo;
     }
 
     private function getDataset($sql, $begin, $indexes)
