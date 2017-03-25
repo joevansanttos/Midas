@@ -70,7 +70,7 @@ class MainController extends Controller
 
                 // chamada da função que contrói a url para a API
                 $query_builder = new QueryBuilderModule();
-                $daas_request_url = $daas_request_url .$query_builder->builder($api_params[0], $query_decomposed[$idArray]);
+                $daas_request_url = $query_builder->builder($api_params[0], $query_decomposed[$idArray]);
                // $daas_request_url[$i-1] = $query_builder->builder($api_params[0], $query_decomposed[$idArray]);
 
             }
