@@ -14,7 +14,6 @@ class QueryBuilderModule extends Module {
     {
         // dominio da api do DaaS
         $daas_request = $api_params->domain;
-
         // URI da api, quando houver
         $daas_request .= $api_params->search_path;
 
@@ -26,34 +25,41 @@ class QueryBuilderModule extends Module {
         }
 
         // caso tenha filtros, acrescenta como parametros da url
-        if (!empty($values["filters"])) {
+        if (!empty($api_params->query_param)) {
             if (strpos($daas_request, "?") !== false) {
                 $daas_request .= "&" . $api_params->query_param . "=" . $values["filters"];
             } else {
                 $daas_request .= "?" . $api_params->query_param . "=" . $values["filters"];
             }
         }
-
+        
         // caso tenha ordem, acrescenta como parametros da url
-        if (!empty($values["order"])) {
-            if (strpos($daas_request, "?") !== false) {
-                $daas_request .= "&" . $api_params->sort_param . "=" . $values["order"];
-            } else {
-                $daas_request .= "?" . $api_params->sort_param . "=" . $values["order"];
+        if (!empty($api_params->sort_param)) {
+            if(array_key_exists('order', $values)){
+                if (strpos($daas_request, "?") !== false) {
+                    $daas_request .= "&" . $api_params->sort_param . "=" . $values["order"];
+                } else {
+                    $daas_request .= "?" . $api_params->sort_param . "=" . $values["order"];
+                }
             }
+            
         }
 
         // caso tenha limite, acrescenta como parametros da url
-        if (!empty($values["limit"])) {
-            if (strpos($daas_request, "?") !== false) {
-                $daas_request .= "&" . $api_params->limit_param . "=" . $values["limit"];
-            } else {
-                $daas_request .= "?" . $api_params->limit_param . "=" . $values["limit"];
-            }
+        if (!empty($api_params->limit_param)) {
+            if(array_key_exists('limit', $values)){
+                if (strpos($daas_request, "?") !== false) {
+                    $daas_request .= "&" . $api_params->limit_param . "=" . $values["limit"];
+                } else {
+                    $daas_request .= "?" . $api_params->limit_param . "=" . $values["limit"];
+                }
+            }  
         }
+        
+        if(!empty($api_params->format_param)){
+            $daas_request .= $api_params->format_param;
 
-        //$daas_request =  'https://data.cityofnewyork.us/resource/r27e-u3sy.csv?borough=Bronx';
-        //$daas_request =  'https://data.cityofnewyork.us/resource/r27e-u3sy.xml?borough=Bronx';
+        }
         return $daas_request;
     }
 

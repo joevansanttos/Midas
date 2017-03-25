@@ -7,7 +7,8 @@
 		"limit_param": "rows",
 		"dataset_param": "dataset",
 		"records_param": "records",
-		"fields_param": "fields"
+		"fields_param": "fields",
+		"format_param": ""
 	},
 	"v8qe-fx6p.json": {
 		"domain": "http://data.cityofnewyork.us",
@@ -17,6 +18,41 @@
 		"limit_param": "$limit",
 		"dataset_param": "",
 		"records_param": "",
-		"fields_param": ""
-	}
+		"fields_param": "",
+		"format_param": ""
+	},
+	"w7a6-9xrz": {
+		"domain": "https://data.cityofnewyork.us",
+		"search_path": "/resource/",
+		"query_param": "",
+		"sort_param": "",
+		"limit_param": "",
+		"dataset_param": "",
+		"records_param": "",
+		"format_param": ".json"
+	},
+	"vz8c-29aj": {
+		"domain": "http://data.cityofnewyork.us",
+		"search_path": "/api/views/",
+		"query_param": "",
+		"sort_param": "",
+		"limit_param": "",
+		"dataset_param": "",
+		"records_param": "",
+		"fields_param": "",
+		"format_param": "/rows.xml"
+		},
+	"ntcm-2w4k": {
+		"domain": "http://data.cityofnewyork.us",
+		"search_path": "/api/views/",
+		"query_param": "",
+		"sort_param": "",
+		"limit_param": "",
+		"dataset_param": "",
+		"records_param": "",
+		"fields_param": "",
+		"format_param": "/rows.csv"
+		}
+
+
 }

@@ -17,7 +17,7 @@ use App\Http\Modules\ResultFormatterModule;
 class MainController extends Controller
 {
 
-    public function index() {
+    public function index() {        
         return view('main');
     }
 
@@ -26,33 +26,47 @@ class MainController extends Controller
      * @param Request $request
      */
     public function daas(Request $request)
-    {
-
+    {           
         // query capturada da requisição do SaaS
         $query = urldecode($request->input('query'));
 
         // chamada da função de decomposição da query
         $query_decomposed = new QueryDecomposerModule();
         $query_decomposed = $query_decomposed->decomposer($query);
+        if(array_key_exists('join', $query_decomposed)){
+          if(!empty($query_decomposed['join'])){
+            // chamada da função que consulta ao dis para pegar as informações do DaaS informado na query
+            $daas_model = new DaaSModel;
+            // chamada da função que contrói a url para a API 
+            $query_builder = new QueryBuilderModule();
+            $consults = $query_decomposed;
+            unset($consults['join']);
+            foreach ($consults as $key => $value) {
+               $api_params = $daas_model->get_provider_api($value['dataset']);
+               $daas_request_url = $query_builder->builder($api_params, $value); 
+               $daas_result[$value['dataset']] = file_get_contents($daas_request_url, false);
+            }
+          }else{
+            $daas_model = new DaaSModel;
+            $api_params = $daas_model->get_provider_api($query_decomposed['consulta1']['dataset']);
+            $query_builder = new QueryBuilderModule();
+            $daas_request_url = $query_builder->builder($api_params, $query_decomposed['consulta1']);
+            $daas_result = file_get_contents($daas_request_url, false);
+          }
+        }else{
+          $daas_model = new DaaSModel;
+          $api_params = $daas_model->get_provider_api($query_decomposed['dataset']);
 
-        // consulta o DIS (arquivo: /public/dis.json)
-        $dis = file_get_contents('dis.json');
-        $dis = json_decode($dis, true);
-        $api_params = (object) $dis[$query_decomposed["dataset"]];
-
-        // chamada da função que contrói a url para a API
-        $query_builder = new QueryBuilderModule();
-        $daas_request_url = $query_builder->builder($api_params, $query_decomposed);
-
-
-        // requisita ao DaaS as informações
-        $daas_result = file_get_contents($daas_request_url, false);
-
-
+          $query_builder = new QueryBuilderModule();
+          $daas_request_url = $query_builder->builder($api_params, $query_decomposed);
+          $daas_result = file_get_contents($daas_request_url, false);
+          $query_decomposed['filters'] = "city = 'New York'";
+          $query_decomposed['consulta1'] = $query_decomposed;
+        }
+        
         // formata o resultado para ser compatível com o SaaS
-        //$result = $this->result_formatter(json_decode(utf8_encode($daas_result)), $query_decomposed, $api_params[0]);
         $result_formatter = new ResultFormatterModule();
-        $result = $result_formatter->formatter($daas_result, $query_decomposed, $api_params);
+        $result = $result_formatter->formatter($daas_result, $query_decomposed);
 
         // envia para a view o resultado formatado
         return view('daas')->with(compact('result'));
