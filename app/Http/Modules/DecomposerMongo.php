@@ -41,7 +41,7 @@ class DecomposerMongo extends QueryDecomposerModule {
         $jsonArray["join"] = null;
         $jsonArray["consulta1"] = $this->gerarInfor($sql);
         $jsonArray["consulta2"] = null;
-        $jsonArray = array_filter ( $jsonArray);
+        //$jsonArray = array_filter ( $jsonArray);
 
         return $jsonArray;
     }
