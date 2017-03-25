@@ -55,7 +55,7 @@ class MainController extends Controller
           }
         }else{
           $daas_model = new DaaSModel;
-          $api_params = $daas_model->get_provider_api($query_decomposed['dataset']);
+          $api_params = $daas_model->get_provider_api($query_decomposed['consulta1']['dataset']);
 
           $query_builder = new QueryBuilderModule();
           $daas_request_url = $query_builder->builder($api_params, $query_decomposed);
