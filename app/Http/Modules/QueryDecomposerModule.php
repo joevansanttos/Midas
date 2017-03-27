@@ -13,9 +13,7 @@ class QueryDecomposerModule extends Module {
      */
     public function decomposer($query)
     {
-        echo $query . "<br><br>";
         $TipoBd = trim(substr($query, 6,3 ));
-        echo $TipoBd;
         if($TipoBd === 'db.' )
         {
 
@@ -32,7 +30,7 @@ class QueryDecomposerModule extends Module {
         }
         else
         {
-            //print_r( "Banco não identificado");
+            print_r( "Banco não identificado");
             exit();
         }
         return $jsonArray2;
