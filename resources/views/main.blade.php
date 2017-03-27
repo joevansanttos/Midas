@@ -79,5 +79,18 @@
             <input type="submit" value="Enviar">
         </form>
 
+        <form method="post" action="daas">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <?php
+
+            $query =    "db.w7a6-9xrz.find({ " .
+                "borough': 'Queens'".
+                " }, { 'facility_name': 1 ".
+                " }) ";
+
+            ?>
+            <textarea name="query"><?php echo http_build_query(array('query'=>$query)); ?></textarea>
+            <input type="submit" value="Enviar">
+        </form>
     </body>
 </html>

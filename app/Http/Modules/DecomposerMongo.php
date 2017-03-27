@@ -40,21 +40,23 @@ class DecomposerMongo extends QueryDecomposerModule {
 
         // gambiarra
         $jsonArrayJoin["tipo"] = "inner join";
-        $jsonArrayJoin["dataset2"]="w7a6-9xrz";
-        $jsonArrayJoin["dataset1"]="vz8c-29aj";
+        $jsonArrayJoin["dataset2"][0]="borough";
+        $jsonArrayJoin["dataset1"][0]="borough";
+        $jsonArrayJoin["dataset2"][1]="w7a6-9xrz";
+        $jsonArrayJoin["dataset1"][1]="vz8c-29aj";
         $jsonArrayJoin["cond"]="=";
 
 
         $jsonArray["join"] = $jsonArrayJoin;
-        $jsonArray["consulta1"] = $this->gerarInfor($sql);
+        $jsonArray["consulta1"] = array_filter ($this->gerarInfor($sql));
 
         $jsonArrayInfo["dataset"] = "vz8c-29aj";
-        $jsonArrayInfo["fields"] = array_filter ({"phone"});
+        $jsonArrayInfo["fields"] = array("phone");
         $jsonArrayInfo["filters"] = null;
         $jsonArrayInfo["order"] = null;
         $jsonArrayInfo["limit"] = null;
 
-        $jsonArray["consulta2"] = $jsonArrayInfo;
+        $jsonArray["consulta2"] = array_filter ($jsonArrayInfo);
 
         //$jsonArray["join"] = null;
         //$jsonArray["consulta1"] = $this->gerarInfor($sql);
