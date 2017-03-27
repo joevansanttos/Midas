@@ -38,9 +38,27 @@ class DecomposerMongo extends QueryDecomposerModule {
 
         $this->setSqlmin(strtolower(trim($query))) ;//
 
-        $jsonArray["join"] = null;
+        // gambiarra
+        $jsonArrayJoin["tipo"] = "inner join";
+        $jsonArrayJoin["dataset2"]="w7a6-9xrz";
+        $jsonArrayJoin["dataset1"]="vz8c-29aj";
+        $jsonArrayJoin["cond"]="=";
+
+
+        $jsonArray["join"] = $jsonArrayJoin;
         $jsonArray["consulta1"] = $this->gerarInfor($sql);
-          $jsonArray["consulta2"] = null;
+
+        $jsonArrayInfo["dataset"] = "vz8c-29aj";
+        $jsonArrayInfo["fields"] = array_filter ({"phone"});
+        $jsonArrayInfo["filters"] = null;
+        $jsonArrayInfo["order"] = null;
+        $jsonArrayInfo["limit"] = null;
+
+        $jsonArray["consulta2"] = $jsonArrayInfo;
+
+        //$jsonArray["join"] = null;
+        //$jsonArray["consulta1"] = $this->gerarInfor($sql);
+        //$jsonArray["consulta2"] = null;
         //$jsonArray = array_filter ( $jsonArray);
 
         return $jsonArray;
