@@ -13,3 +13,4 @@
 
 Route::post('daas', 'MainController@daas');
 Route::get('/', 'MainController@index');
+Route::get('api', ['as' => 'main', 'uses' => 'ApiController@main']);
