@@ -73,23 +73,4 @@ class MainController extends Controller
 
     }
 
-    /**
-     * Função da API que disponibilizará banco de dados como DaaS
-     * @param Request $request dados informados da api
-     * @return mixed retorna o conjunto de dados como o cliente solicitou
-     **/
-    public function api(Request $request) {
-        // dados coletados para a api
-        $dataset = urldecode($request->input('dataset'));
-        $fields = urldecode($request->input('fields'));
-        $sort = urldecode($request->input('sort'));
-        $limit = urldecode($request->input('limit'));
-        $format = urldecode($request->input('format'));
-        $refine = urldecode($request->input('refine'));
-        $exclude = urldecode($request->input('exclude'));
-
-        print_r($exclude);
-
-    }
-
 }
