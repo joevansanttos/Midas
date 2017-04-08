@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Models\ApiModel;
 
 class ApiController extends Controller {
 
@@ -21,8 +22,8 @@ class ApiController extends Controller {
 	        unset($all['dataset']);
 	        $fields = (!empty($all['fields'])) ? $all['fields'] : null;
 	        unset($all['fields']);
-	        $sort = (!empty($all['sort'])) ? $all['sort'] : null;
-	        unset($all['sort']);
+	        $order = (!empty($all['order'])) ? $all['order'] : null;
+	        unset($all['order']);
 	        $limit = (!empty($all['limit'])) ? $all['limit'] : null;
 	        unset($all['limit']);
 	        $format = (!empty($all['format'])) ? $all['format'] : null;
@@ -37,6 +38,10 @@ class ApiController extends Controller {
 					$exclude[substr($key, 8)][] = $value;
 	        	}
 	        }
+
+	        $apiModel = new ApiModel;
+	        $resApiModel = $apiModel->get_data($dataset, $fields, $order, $limit, $format, $refine, $exclude);
+	        print_r($resApiModel);
 	    } else {
 	    	echo 'ERROR 400! Dataset NOT FOUND!';
 	    }

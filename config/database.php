@@ -46,7 +46,34 @@ return [
 
     'connections' => [
 
-        'sqlite' => [
+        'test-mysql' => [
+            'driver' => 'mysql',
+            'host' => 'us-cdbr-iron-east-04.cleardb.net',
+            'port' => '3306',
+            'database' => 'heroku_07b2ee1bdcc6603',
+            'username' => 'b6945bac0598ec',
+            'password' => '73ea1cb0',
+            'charset' => 'utf8',
+            'collation' => 'utf8_unicode_ci',
+            'select' => '',
+            'from' => 'api',
+            'join' => '',
+            'where' => '',
+            'order' => '',
+            'limit' => '',
+            'groupBy' => ''
+        ],
+
+        'embrapa' => [
+            'driver'   => 'mongodb',
+            'host'     => 'ds119768.mlab.com',
+            'port'     => '19768',
+            'database' => 'heroku_mnk5ppkt',
+            'username' => 'heroku_mnk5ppkt',
+            'password' => 'ginmsvcu3kel8615t448gmsket'
+        ]
+
+        /*'sqlite' => [
             'driver' => 'sqlite',
             'database' => env('DB_DATABASE', database_path('database.sqlite')),
             'prefix' => '',
@@ -87,10 +114,9 @@ return [
             'username' => env('DB_USERNAME', 'admin'),
             'password' => env('DB_PASSWORD', 'admin'),
             'options' => [
-        'database' => 'heroku_mnk5ppkt' // sets the authentication database required by mongo 3
-      ]
-],
-
+                'database' => 'heroku_mnk5ppkt' // sets the authentication database required by mongo 3
+            ]
+        ]*/
 
     ],
 
