@@ -55,11 +55,20 @@ return [
             'password' => '73ea1cb0',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'select' => '',
+
+            'select' => [
+
+            ],
             'from' => 'api',
-            'join' => '',
-            'where' => '',
-            'order' => '',
+            'join' => [
+                'provider', 'api.id', '=', 'provider.id_api',
+                'dataset', 'provider.id', '=', 'dataset.id_provider'
+            ],
+            'where' => [
+            ],
+            'order' => [
+                'api.id', 'desc'
+            ],
             'limit' => '',
             'groupBy' => ''
         ],
@@ -69,8 +78,54 @@ return [
             'host'     => 'ds119768.mlab.com',
             'port'     => '19768',
             'database' => 'heroku_mnk5ppkt',
-            'username' => 'heroku_mnk5ppkt',
-            'password' => 'ginmsvcu3kel8615t448gmsket'
+            'username' => 'teste',
+            'password' => '12345678',
+            'options'  => [
+                'database' => 'heroku_mnk5ppkt'
+            ],
+
+            'select' => [
+
+            ],
+            'collection' => 'teste',
+            'join' => [
+
+            ],
+            'where' => [
+            
+            ],
+            'order' => [
+
+            ],
+            'limit' => ''
+        ],
+
+        'teste-post' => [
+            'driver' => 'pgsql',
+            'host' => 'ec2-23-23-228-115.compute-1.amazonaws.com',
+            'port' => '5432',
+            'database' => 'd736umlve9c426',
+            'username' => 'mydnosilrzztoa',
+            'password' => 'TbdHSFy3HpfsDkEsK4ivqp14Z2',
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'public',
+            'sslmode' => 'prefer',
+
+            'select' => [
+
+            ],
+            'from' => 'api',
+            'join' => [
+
+            ],
+            'where' => [
+            
+            ],
+            'order' => [
+
+            ],
+            'limit' => ''
         ]
 
         /*'sqlite' => [
