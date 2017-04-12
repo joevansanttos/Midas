@@ -167,6 +167,8 @@ return [
          * Package Service Providers...
          */
         Jenssegers\Mongodb\MongodbServiceProvider::class,
+        Vinelab\NeoEloquent\NeoEloquentServiceProvider::class,
+        //Ytake\LaravelVoltDB\VoltDBServiceProvider::class,
         //
 
         /*
@@ -226,6 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //'VoltDBApi' => Ytake\LaravelVoltDB\VoltDBFacade::class,
 
     ],
 
