@@ -35,6 +35,8 @@ class DbaasModel extends Model {
             } else {
                 $fields = $c_fields;
             }
+        } else {
+            $fields = explode(',', $fields);
         }
         $query = call_user_func_array(array($query, 'select'), $fields);
 

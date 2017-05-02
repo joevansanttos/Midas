@@ -46,7 +46,7 @@ return [
 
     'connections' => [
 
-        'test-mysql' => [
+        'hospitals-mysql' => [
             'driver' => 'mysql',
             'host' => 'us-cdbr-iron-east-04.cleardb.net',
             'port' => '3306',
@@ -59,7 +59,7 @@ return [
             'select' => [
 
             ],
-            'from' => 'api',
+            'from' => 'hospitals',
             'join' => [
                 'provider', 'api.id', '=', 'provider.id_api',
                 'dataset', 'provider.id', '=', 'dataset.id_provider'
@@ -73,7 +73,7 @@ return [
             'groupBy' => ''
         ],
 
-        'embrapa' => [
+        'hospitals-mongo' => [
             'driver'   => 'mongodb',
             'host'     => 'ds119768.mlab.com',
             'port'     => '19768',
@@ -87,7 +87,7 @@ return [
             'select' => [
 
             ],
-            'collection' => 'teste',
+            'collection' => 'hospitals',
             'join' => [
 
             ],
