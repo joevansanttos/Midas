@@ -61,13 +61,10 @@ return [
             ],
             'from' => 'hospitals',
             'join' => [
-                'provider', 'api.id', '=', 'provider.id_api',
-                'dataset', 'provider.id', '=', 'dataset.id_provider'
             ],
             'where' => [
             ],
             'order' => [
-                'api.id', 'desc'
             ],
             'limit' => '',
             'groupBy' => ''
