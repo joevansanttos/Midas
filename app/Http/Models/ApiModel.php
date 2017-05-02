@@ -62,12 +62,47 @@ class ApiModel extends Model {
                 case 'mongodb':
                     $mongo = new MongoModel;
                     $result = $mongo->get($conn, $fields, $order, $limit, $refine, $exclude);
+                    foreach ($result AS $key => $v) {
+                        $result[$key] = array_slice($v, 1);
+                    }
                     break;
                 case 'neo4j':
                     $neo4j = new Neo4jModel;
                     $result = $neo4j->get($conn, $fields, $order, $limit, $refine, $exclude);
                     break;
             }
+        }
+
+        // formatar
+        switch($format) {
+            case 'json':
+                $result = json_encode($result);
+                break;
+            case 'xml':
+                $xml = new \SimpleXMLElement('<' . $dataset . '/>');
+                array_walk_recursive($result, array ($xml, 'addChild'));
+                $result = $xml->asXML();
+                break;
+            case 'csv':
+                function array_2_csv($array) {
+                    $csv = array();
+                    foreach ($array as $item) {
+                        if (is_array($item)) {
+                            $csv[] = array_2_csv($item);
+                        } else {
+                            $csv[] = $item;
+                        }
+                    }
+                    return implode(',', $csv) . '<br>';
+                } 
+
+                $resultKey = implode(',', array_keys($result[0])) . '<br>';
+                $resultValues = array_2_csv($result);
+                $result = $resultKey . $resultValues;
+                break;
+            default:
+                $result = json_encode($result);
+                break;
         }
 
     	return $result;
