@@ -7,7 +7,7 @@ use Jenssegers\Mongodb\Eloquent\Model as Eloquent;
 use DB;
 
 class MongoModel extends DbaasModel {
-    public function get($conn, $fields = null, $sort = null, $limit = null, $refine = null, $exclude = null) {
+    public function get($conn, $fields = null, $order = null, $limit = null, $refine = null, $exclude = null) {
         // variaveis configuradas
         $c_fields = $conn->getConfig('fields');
         $c_from = $conn->getConfig('collection');
@@ -97,15 +97,15 @@ class MongoModel extends DbaasModel {
         if (empty($order) && !empty($c_order)) {
             $query = $query->orderBy($c_order[0], $c_order[1]);
         } else if (!empty($order)) {
-            $order = explode(' ', $order);
+            $order = (strpos(trim($order), ' ') !== false) ? explode(' ', $order) : array($order, 'asc');
             $query = $query->orderBy($order[0], $order[1]);
         }
 
         // organiza o limite
         if (empty($limit) && !empty($c_limit)) {
-            $query = $query->limit($c_limit);
+            $query = $query->limit((int) $c_limit);
         } else if (!empty($limit)) {
-            $query = $query->limit($limit);
+            $query = $query->limit((int) $limit);
         }
 
         // organiza o group by

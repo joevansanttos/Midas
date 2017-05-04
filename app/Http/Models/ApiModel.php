@@ -62,9 +62,6 @@ class ApiModel extends Model {
                 case 'mongodb':
                     $mongo = new MongoModel;
                     $result = $mongo->get($conn, $fields, $order, $limit, $refine, $exclude);
-                    foreach ($result AS $key => $v) {
-                        $result[$key] = array_slice($v, 1);
-                    }
                     break;
                 case 'neo4j':
                     $neo4j = new Neo4jModel;
@@ -79,11 +76,43 @@ class ApiModel extends Model {
                 $result = json_encode($result);
                 break;
             case 'xml':
-                $xml = new \SimpleXMLElement('<' . $dataset . '/>');
-                array_walk_recursive($result, array ($xml, 'addChild'));
+                // em caso de ser objeto, trata para converter em csv
+                if (is_object($result)) {
+                    $result = json_decode(json_encode($result), true);
+                }
+
+                // function to convert an array to XML using SimpleXML
+                function array_to_xml($array, &$xml) {
+                    foreach($array as $key => $value) {
+                        if(is_array($value)) {
+                            if(!is_numeric($key)){
+                                $subnode = $xml->addChild(htmlspecialchars("$key"));
+                                array_to_xml($value, $subnode);
+                            } else {
+                                array_to_xml($value, $xml);
+                            }
+                        } else {
+                            $xml->addChild(htmlspecialchars("$key"),htmlspecialchars("$value"));
+                        }
+                    }
+                }
+
+                // create simpleXML object
+                $xml = new \SimpleXMLElement("<data/>");
+
+                // function call to convert array to xml
+                array_to_xml($result, $xml);
+
+                // display XML to screen
                 $result = $xml->asXML();
                 break;
             case 'csv':
+                // em caso de ser objeto, trata para converter em csv
+                if (is_object($result)) {
+                    $result = json_decode(json_encode($result), true);
+                }
+
+                // função que converte array em csv
                 function array_2_csv($array) {
                     $csv = array();
                     foreach ($array as $item) {
@@ -93,10 +122,10 @@ class ApiModel extends Model {
                             $csv[] = $item;
                         }
                     }
-                    return implode(',', $csv) . '<br>';
+                    return implode(',', $csv) . PHP_EOL;
                 } 
 
-                $resultKey = implode(',', array_keys($result[0])) . '<br>';
+                $resultKey = implode(',', array_keys($result[0])) . PHP_EOL;
                 $resultValues = array_2_csv($result);
                 $result = $resultKey . $resultValues;
                 break;

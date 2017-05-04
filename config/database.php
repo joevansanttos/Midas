@@ -112,7 +112,7 @@ return [
             'select' => [
 
             ],
-            'from' => 'api',
+            'from' => 'hospitals',
             'join' => [
 
             ],
